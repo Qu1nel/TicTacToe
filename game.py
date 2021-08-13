@@ -9,7 +9,16 @@ class Game(object):
     framerate: int
 
     def __init__(self, caption, width, height, framerate=60):
-        pass
+        pygame.init()
+        pygame.display.set_caption(caption)
+        self.screen = pygame.display.set_mode((width, height))
+        self.clock = pygame.time.Clock()
+        self.framerate = framerate
+        self.width = width
+        self.height = height
+        self.player = 1
+        self.game_over = False
+        self.current_winner = None
 
     def minimax(self, player: int) -> dict:
         """Algorithm for tic-tac-toe, based on minimax"""
