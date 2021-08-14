@@ -35,7 +35,12 @@ class Interface(Game):
 
     def _draw_lines(self) -> None:
         """Draws the lines for BG"""
-        raise NotImplemented
+        # horizontals
+        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (0, self.sq_size), (self.width, self.sq_size), self.win_ln_width)
+        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (0, self.sq_size * 2), (self.width, self.sq_size * 2), self.win_ln_width)
+        # vertical
+        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (self.sq_size, 0), (self.sq_size, self.height), self.win_ln_width)
+        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (self.sq_size * 2, 0), (self.sq_size * 2, self.height), self.win_ln_width)
 
     def _draw_vertical_winning_line(self) -> None:
         """Draws a vertical line after winning"""

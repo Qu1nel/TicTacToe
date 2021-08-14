@@ -21,8 +21,8 @@ class TicTacToe(Interface):
         while True:
             pygame.display.update()
 
-            self.computer()
-            self.handle_events()
+            # self.computer()
+            # self.handle_events()
 
             self.clock.tick(self.framerate)
 
