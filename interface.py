@@ -58,6 +58,12 @@ class Interface(Game):
         """Draws a right diagonal (Top right) line after winning"""
         raise NotImplemented
 
+    def _draw_circle(self):
+        raise NotImplemented
+
+    def _draw_cross(self):
+        raise NotImplemented
+
     def draw_figures(self) -> None:
         """Draws the main figures (circle and cross)"""
         raise NotImplemented

@@ -24,7 +24,7 @@ class Game(object):
         """Algorithm for tic-tac-toe, based on minimax"""
         raise NotImplemented
 
-    def update(self, row: int, cols: int) -> None:
+    def update(self, row: int, col: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
         raise NotImplemented
 

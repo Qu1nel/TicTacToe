@@ -22,6 +22,12 @@ class TicTacToe(Interface):
         self.player = 1
         self.game_over = False
 
+    def update(self, row: int, col: int):
+        """Updates the table, renders it and checks if there is a victory"""
+        if self.board.available_square(row, col):
+            self.board.mark_square(row, col, self.player)
+            ...
+
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
         for event in pygame.event.get():
@@ -31,11 +37,16 @@ class TicTacToe(Interface):
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
+                self.update(clock_row, clock_col)
 
             if event.type == pygame.KEYDOWN:
                 if event.type == pygame.K_r:
                     self.restart()
+
+    def computer(self):
+        """Makes a move for the opponent (computer)"""
+        pass
 
     def run(self) -> None:
         """Launches the game"""
@@ -43,7 +54,7 @@ class TicTacToe(Interface):
         while True:
             pygame.display.update()
 
-            # self.computer()
+            self.computer()
             self.handle_events()
 
             self.clock.tick(self.framerate)
