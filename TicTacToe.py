@@ -10,11 +10,25 @@ from board import GameBoard
 
 
 class TicTacToe(Interface):
-    pass
+
+    def __init__(self):
+        super().__init__()
+        self.board = GameBoard()
+
+    def run(self) -> None:
+        """Launches the game"""
+        self.draw_BG()
+        while True:
+            pygame.display.update()
+
+            self.computer()
+            self.handle_events()
+
+            self.clock.tick(self.framerate)
 
 
 def main():
-    pass
+    TicTacToe().run()
 
 
 if __name__ == '__main__':
