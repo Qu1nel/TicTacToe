@@ -15,6 +15,13 @@ class TicTacToe(Interface):
         super().__init__()
         self.board = GameBoard()
 
+    def restart(self):
+        """Launches a new game"""
+        self.draw_BG()
+        self.board = GameBoard()
+        self.player = 1
+        self.game_over = False
+
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
         for event in pygame.event.get():
@@ -27,7 +34,8 @@ class TicTacToe(Interface):
                 pass
 
             if event.type == pygame.KEYDOWN:
-                pass
+                if event.type == pygame.K_r:
+                    self.restart()
 
     def run(self) -> None:
         """Launches the game"""
