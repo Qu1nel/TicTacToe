@@ -36,25 +36,33 @@ class Interface(Game):
     def _draw_lines(self) -> None:
         """Draws the lines for BG"""
         # horizontals
-        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (0, self.sq_size), (self.width, self.sq_size), self.win_ln_width)
-        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (0, self.sq_size * 2), (self.width, self.sq_size * 2), self.win_ln_width)
+        pyg.draw.line(surface=self.screen, color=colors.BG_LINE_COLOR,
+                      start_pos=(0, self.sq_size), end_pos=(self.width, self.sq_size),
+                      width=self.win_ln_width)
+        pyg.draw.line(surface=self.screen, color=colors.BG_LINE_COLOR,
+                      start_pos=(0, self.sq_size * 2), end_pos=(self.width, self.sq_size * 2),
+                      width=self.win_ln_width)
         # vertical
-        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (self.sq_size, 0), (self.sq_size, self.height), self.win_ln_width)
-        pyg.draw.line(self.screen, colors.BG_LINE_COLOR, (self.sq_size * 2, 0), (self.sq_size * 2, self.height), self.win_ln_width)
+        pyg.draw.line(surface=self.screen, color=colors.BG_LINE_COLOR,
+                      start_pos=(self.sq_size, 0), end_pos=(self.sq_size, self.height),
+                      width=self.win_ln_width)
+        pyg.draw.line(surface=self.screen, color=colors.BG_LINE_COLOR,
+                      start_pos=(self.sq_size * 2, 0), end_pos=(self.sq_size * 2, self.height),
+                      width=self.win_ln_width)
 
-    def _draw_vertical_winning_line(self) -> None:
+    def _draw_vertical_winning_line(self, col: int, player: int) -> None:
         """Draws a vertical line after winning"""
         raise NotImplemented
 
-    def _draw_horizontal_winning_line(self) -> None:
+    def _draw_horizontal_winning_line(self, row: int, player: int) -> None:
         """Draws a horizontal line after winning"""
         raise NotImplemented
 
-    def _draw_left_diagonal_line(self) -> None:
+    def _draw_left_diagonal_line(self, player: int) -> None:
         """Draws a left diagonal (Top left) line after winning"""
         raise NotImplemented
 
-    def _draw_right_diagonal_line(self) -> None:
+    def _draw_right_diagonal_line(self, player: int) -> None:
         """Draws a right diagonal (Top right) line after winning"""
         raise NotImplemented
 

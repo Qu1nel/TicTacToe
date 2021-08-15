@@ -22,11 +22,46 @@ class TicTacToe(Interface):
         self.player = 1
         self.game_over = False
 
+    def check_win(self, player: int, draw=True) -> bool:
+        """The function determines whether there has been a victory
+        and draws a victory line for the winning piece using the flag.
+
+        :param player: The player who made the move (int)
+        :param draw: A flag that determines whether to draw when a victory is detected (bool)
+        :return: bool
+        """
+        for col in range(self.board.cols):  # vertical win check
+            if (self.board[0][col], self.board[1][col], self.board[2][col]) == (player, player, player):
+                if draw:
+                    self._draw_vertical_winning_line(col, player)
+                return True
+
+        for row in range(self.board.rows):  # horizontal win check
+            if (self.board[row][0], self.board[row][1], self.board[row][2]) == (player, player, player):
+                if draw:
+                    self._draw_horizontal_winning_line(col, player)
+                return True
+
+        # asc diagonal win check
+        if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player):
+            if draw:
+                self._draw_asc_diagonal(self.player)
+            return True
+
+        # desc diagonal win chek
+        if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player):
+            if draw:
+                self._draw_desc_diagonal(self.player)
+            return True
+
+        return False
+
     def update(self, row: int, col: int):
         """Updates the table, renders it and checks if there is a victory"""
         if self.board.available_square(row, col):
             self.board.mark_square(row, col, self.player)
-            ...
+            if self.check_win(self.player, draw=True):
+                pass
 
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
