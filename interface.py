@@ -69,21 +69,27 @@ class Interface(Game):
                       end_pos=(col * self.sq_size + self.sq_size - SPACE, row * self.sq_size + self.sq_size - SPACE),
                       width=self.crss_width)
 
-    def _draw_vertical_winning_line(self, col: int, player: int) -> None:
+    def _draw_vertical_winning_line(self, col: int, player: int) -> None:  # 12px is the indentation
         """Draws a vertical line after winning"""
-        raise NotImplemented
+        pos_x = col * self.sq_size + self.sq_size // 2
+        color = self.crcl_color if player == 1 else self.crss_color
+        pyg.draw.line(self.screen, color, (pos_x, 12), (pos_x, self.height - 12), self.win_ln_width)
 
-    def _draw_horizontal_winning_line(self, row: int, player: int) -> None:
+    def _draw_horizontal_winning_line(self, row: int, player: int) -> None:  # 12px is the indentation
         """Draws a horizontal line after winning"""
-        raise NotImplemented
+        pos_y = row * self.sq_size + self.sq_size // 2
+        color = self.crcl_color if player == 1 else self.crss_color
+        pyg.draw.line(self.screen, color, (12, pos_y), (self.height - 12, pos_y), self.win_ln_width)
 
-    def _draw_left_diagonal_line(self, player: int) -> None:
+    def _draw_left_diagonal_line(self, player: int) -> None:  # 12px is the indentation
         """Draws a left diagonal (Top left) line after winning"""
-        raise NotImplemented
+        color = self.crcl_color if player == 1 else self.crss_color
+        pyg.draw.line(self.screen, color, (12, self.height - 12), (self.width - 12, 12), self.win_ln_width)
 
-    def _draw_right_diagonal_line(self, player: int) -> None:
+    def _draw_right_diagonal_line(self, player: int) -> None:  # 12px is the indentation
         """Draws a right diagonal (Top right) line after winning"""
-        raise NotImplemented
+        color = self.crcl_color if player == 1 else self.crss_color
+        pyg.draw.line(self.screen, color, (12, 12), (self.width - 12, self.height - 12), self.win_ln_width)
 
     def draw_figures(self) -> None:
         """Draws the main figures (circle and cross)"""

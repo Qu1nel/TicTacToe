@@ -48,19 +48,19 @@ class TicTacToe(Interface):
         for row in range(self.board.rows):  # horizontal win check
             if (self.board[row][0], self.board[row][1], self.board[row][2]) == (player, player, player):
                 if draw:
-                    self._draw_horizontal_winning_line(col, player)
+                    self._draw_horizontal_winning_line(row, player)
                 return True
 
         # asc diagonal win check
         if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player):
             if draw:
-                self._draw_asc_diagonal(self.player)
+                self._draw_left_diagonal_line(self.player)
             return True
 
         # desc diagonal win chek
         if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player):
             if draw:
-                self._draw_desc_diagonal(self.player)
+                self._draw_right_diagonal_line(self.player)
             return True
 
         return False
@@ -87,7 +87,7 @@ class TicTacToe(Interface):
                 self.update(clock_row, clock_col)
 
             if event.type == pygame.KEYDOWN:
-                if event.type == pygame.K_r:
+                if event.key == pygame.K_r:
                     self.restart()
 
     def computer(self) -> None:
