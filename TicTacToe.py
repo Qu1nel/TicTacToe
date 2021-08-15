@@ -15,12 +15,13 @@ class TicTacToe(Interface):
         super().__init__()
         self.board = GameBoard()
 
-    def restart(self) -> None:
-        """Launches a new game"""
-        self.draw_BG()
-        self.board = GameBoard()
-        self.player = 1
-        self.game_over = False
+    def minimax(self, player: int) -> dict:
+        """Algorithm for tic-tac-toe, based on minimax"""
+        pass
+
+    def computer(self) -> None:
+        """Makes a move for the opponent (computer)"""
+        pass
 
     def draw_figures(self) -> None:
         """Draws shapes (cross, circle) relative to the state of the board"""
@@ -70,9 +71,18 @@ class TicTacToe(Interface):
         if self.board.available_square(row, col):
             self.board.mark_square(row, col, self.player)
             if self.check_win(self.player, draw=True):
+                self.current_winner = self.player
                 self.game_over = True
             self.player = self.player % 2 + 1
             self.draw_figures()
+
+    def restart(self) -> None:
+        """Launches a new game"""
+        self.draw_BG()
+        self.board = GameBoard()
+        self.player = 1
+        self.game_over = False
+        self.current_winner = None
 
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
@@ -89,10 +99,6 @@ class TicTacToe(Interface):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self.restart()
-
-    def computer(self) -> None:
-        """Makes a move for the opponent (computer)"""
-        pass
 
     def run(self) -> None:
         """Launches the game"""
