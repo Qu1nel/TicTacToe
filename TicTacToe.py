@@ -15,12 +15,21 @@ class TicTacToe(Interface):
         super().__init__()
         self.board = GameBoard()
 
-    def restart(self):
+    def restart(self) -> None:
         """Launches a new game"""
         self.draw_BG()
         self.board = GameBoard()
         self.player = 1
         self.game_over = False
+
+    def draw_figures(self) -> None:
+        """Draws shapes (cross, circle) relative to the state of the board"""
+        for row in range(self.board.rows):
+            for col in range(self.board.cols):
+                if self.board[row][col] == 1:
+                    self._draw_circle(row, col)
+                elif self.board[row][col] == 2:
+                    self._draw_cross(row, col)
 
     def check_win(self, player: int, draw=True) -> bool:
         """The function determines whether there has been a victory
@@ -56,12 +65,14 @@ class TicTacToe(Interface):
 
         return False
 
-    def update(self, row: int, col: int):
+    def update(self, row: int, col: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
         if self.board.available_square(row, col):
             self.board.mark_square(row, col, self.player)
             if self.check_win(self.player, draw=True):
-                pass
+                self.game_over = True
+            self.player = self.player % 2 + 1
+            self.draw_figures()
 
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
@@ -79,7 +90,7 @@ class TicTacToe(Interface):
                 if event.type == pygame.K_r:
                     self.restart()
 
-    def computer(self):
+    def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
         pass
 

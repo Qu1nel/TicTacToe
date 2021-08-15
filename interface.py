@@ -3,7 +3,8 @@ from typing import Union
 import pygame as pyg
 
 import colors
-import config as con
+import config as c
+from config import SPACE
 from game import Game
 
 
@@ -18,15 +19,15 @@ class Interface(Game):
     crcl_rad: int
 
     def __init__(self):
-        super().__init__(con.CAPTION, con.SC_WIDTH, con.SC_HEIGHT, con.FRAME_RATE)
-        self.sq_size = con.SQUARE_SIZE
-        self.ln_width = con.LINE_WIDTH
-        self.win_ln_width = con.WIN_LINE_WIDTH
+        super().__init__(c.CAPTION, c.SC_WIDTH, c.SC_HEIGHT, c.FRAME_RATE)
+        self.sq_size = c.SQUARE_SIZE
+        self.ln_width = c.LINE_WIDTH
+        self.win_ln_width = c.WIN_LINE_WIDTH
         self.crcl_color = colors.CIRCLE_COLOR
         self.crss_color = colors.CROSS_COLOR
-        self.crss_width = con.CROSS_WIDTH
-        self.crcl_width = con.CIRCLE_WIDTH
-        self.crcl_rad = con.CIRCLE_RADIUS
+        self.crss_width = c.CROSS_WIDTH
+        self.crcl_width = c.CIRCLE_WIDTH
+        self.crcl_rad = c.CIRCLE_RADIUS
 
     def draw_BG(self) -> None:
         """Draws the background"""
@@ -50,6 +51,24 @@ class Interface(Game):
                       start_pos=(self.sq_size * 2, 0), end_pos=(self.sq_size * 2, self.height),
                       width=self.win_ln_width)
 
+    def _draw_circle(self, row: int, col: int) -> None:
+        """draws a circle no the game board"""
+        pyg.draw.circle(surface=self.screen, color=self.crcl_color,
+                        center=(col * self.sq_size + self.sq_size // 2, row * self.sq_size + self.sq_size // 2),
+                        radius=self.crcl_rad, width=self.crcl_width)
+
+    def _draw_cross(self, row: int, col: int) -> None:
+        """draws a cross no the game board"""
+        pyg.draw.line(surface=self.screen, color=self.crss_color,
+                      start_pos=(col * self.sq_size + SPACE, row * self.sq_size + self.sq_size - SPACE),
+                      end_pos=(col * self.sq_size + self.sq_size - SPACE, row * self.sq_size + SPACE),
+                      width=self.crss_width)
+
+        pyg.draw.line(surface=self.screen, color=self.crss_color,
+                      start_pos=(col * self.sq_size + SPACE, row * self.sq_size + SPACE),
+                      end_pos=(col * self.sq_size + self.sq_size - SPACE, row * self.sq_size + self.sq_size - SPACE),
+                      width=self.crss_width)
+
     def _draw_vertical_winning_line(self, col: int, player: int) -> None:
         """Draws a vertical line after winning"""
         raise NotImplemented
@@ -64,12 +83,6 @@ class Interface(Game):
 
     def _draw_right_diagonal_line(self, player: int) -> None:
         """Draws a right diagonal (Top right) line after winning"""
-        raise NotImplemented
-
-    def _draw_circle(self):
-        raise NotImplemented
-
-    def _draw_cross(self):
         raise NotImplemented
 
     def draw_figures(self) -> None:
