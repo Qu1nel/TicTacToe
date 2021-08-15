@@ -24,7 +24,13 @@ class TicTacToe(Interface):
             count_zeros = np.sum(self.board.get_board == 0) + 1
             return dict(position=None, score=1 * count_zeros if other_player == best_player else -1 * count_zeros)
 
-        ...
+        elif 0 not in self.board.get_board:
+            return dict(position=None, score=0)
+
+        if player == best_player:
+            best_move = dict(position=None, score=-math.inf)  # each score should maximize
+        else:
+            best_move = dict(position=None, score=math.inf)  # each score should minimize
 
     def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
