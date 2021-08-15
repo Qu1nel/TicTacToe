@@ -21,7 +21,19 @@ class TicTacToe(Interface):
 
     def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
-        pass
+        if self.player == 1 and not self.game_over:
+            time.sleep(.5)
+            print(np.sum(self.board.get_board == 0))
+
+            if np.sum(self.board.get_board == 0) == 9:
+                coordinates = random.randint(0, 8)  # MINIMAX
+            else:
+                coordinates = random.randint(0, 8)
+
+            assert isinstance(coordinates, (int, float))
+
+            clock_row, clock_col = coordinates // 3, coordinates % 3
+            self.update(clock_row, clock_col)
 
     def draw_figures(self) -> None:
         """Draws shapes (cross, circle) relative to the state of the board"""
@@ -92,7 +104,7 @@ class TicTacToe(Interface):
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over and self.player == 2:
                 clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
                 self.update(clock_row, clock_col)
 
