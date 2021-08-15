@@ -4,9 +4,13 @@ import time
 import random
 import pygame
 import numpy as np
-import config as c
 from interface import Interface
 from board import GameBoard
+
+
+# ---------------------
+# It is necessary to add the Player classes and from them make the PlayerHuman and ComputerPlayer classes
+# ---------------------
 
 
 class TicTacToe(Interface):
