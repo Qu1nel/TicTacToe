@@ -17,7 +17,14 @@ class TicTacToe(Interface):
 
     def minimax(self, player: int) -> dict:
         """Algorithm for tic-tac-toe, based on minimax"""
-        pass
+        best_player = self.player
+        other_player = 1 if player == 2 else 2
+
+        if self.current_winner == other_player:  # first we want to check if the previous move is a winner
+            count_zeros = np.sum(self.board.get_board == 0) + 1
+            return dict(position=None, score=1 * count_zeros if other_player == best_player else -1 * count_zeros)
+
+        ...
 
     def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
