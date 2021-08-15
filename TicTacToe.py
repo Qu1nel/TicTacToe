@@ -32,6 +32,30 @@ class TicTacToe(Interface):
         else:
             best_move = dict(position=None, score=math.inf)  # each score should minimize
 
+        straight_board = [digit for row in self.board.get_board for digit in row]
+        for possible_move in [indx for indx, digit in enumerate(straight_board) if digit == 0]:
+
+            self.board.mark_square(possible_move // 3, possible_move % 3, player)
+            if self.check_win(player, draw=False):
+                self.current_winner = player
+
+            sim_score = self.minimax(other_player)
+
+            # undo move
+            self.board[possible_move // 3][possible_move % 3] = 0
+            self.current_winner = None
+
+            sim_score['position'] = possible_move  # this represents the move optimal next move
+
+            if player == best_player:
+                if sim_score['score'] > best_move['score']:
+                    best_move = sim_score
+            else:
+                if sim_score['score'] < best_move['score']:
+                    best_move = sim_score
+
+        return best_move
+
     def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
         if self.player == 1 and not self.game_over:
