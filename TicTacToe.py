@@ -60,10 +60,9 @@ class TicTacToe(Interface):
         """Makes a move for the opponent (computer)"""
         if self.player == 1 and not self.game_over:
             time.sleep(.5)
-            print(np.sum(self.board.get_board == 0))
 
-            if np.sum(self.board.get_board == 0) == 9:
-                coordinates = random.randint(0, 8)  # MINIMAX
+            if np.sum(self.board.get_board == 0) != 9:
+                coordinates = self.minimax(self.player)['position']  # MINIMAX
             else:
                 coordinates = random.randint(0, 8)
 
