@@ -1,4 +1,5 @@
 from typing import Union
+from abc import abstractmethod
 
 import pygame as pyg
 
@@ -91,6 +92,7 @@ class Interface(Game):
         color = self.crcl_color if player == 1 else self.crss_color
         pyg.draw.line(self.screen, color, (12, 12), (self.width - 12, self.height - 12), self.win_ln_width)
 
+    @abstractmethod
     def draw_figures(self) -> None:
         """Draws the main figures (circle and cross)"""
-        raise NotImplemented
+        pass
