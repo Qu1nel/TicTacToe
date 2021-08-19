@@ -8,3 +8,5 @@ To run, you need to install third-party modules (It is advisable to install the 
 1. pygame
 
 2. Numpy
+***
+To restart the game you need to press 'R'

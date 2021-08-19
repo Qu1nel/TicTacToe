@@ -118,6 +118,14 @@ class TicTacToe(Interface):
 
         return False
 
+    def restart(self) -> None:
+        """Launches a new game"""
+        self.draw_BG()
+        self.board = GameBoard()
+        self.player = 1
+        self.game_over = False
+        self.current_winner = None
+
     def update(self, row: int, col: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
         if self.board.available_square(row, col):
@@ -127,14 +135,6 @@ class TicTacToe(Interface):
                 self.game_over = True
             self.player = self.player % 2 + 1
             self.draw_figures()
-
-    def restart(self) -> None:
-        """Launches a new game"""
-        self.draw_BG()
-        self.board = GameBoard()
-        self.player = 1
-        self.game_over = False
-        self.current_winner = None
 
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
