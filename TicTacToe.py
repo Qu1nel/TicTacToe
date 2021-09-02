@@ -4,8 +4,10 @@ import time
 import random
 import pygame
 import numpy as np
+from config import GO_FIRST
 from interface import Interface
 from board import GameBoard
+from player import HumanPlayer, ComputerPlayer
 
 
 # ---------------------
@@ -17,6 +19,10 @@ class TicTacToe(Interface):
 
     def __init__(self):
         super().__init__()
+        self.player = 1
+        self.go_first = GO_FIRST
+        self.TMP_player = HumanPlayer()
+        self.computer_player = ComputerPlayer()
         self.board = GameBoard()
 
     def minimax(self, player: int) -> dict:
@@ -152,15 +158,21 @@ class TicTacToe(Interface):
                 if event.key == pygame.K_r:
                     self.restart()
 
+    def make_moves(self) -> None:
+        if self.go_first == 'COMPUTER':
+            self.computer()
+            self.go_first = 'PLAYER'
+        else:
+            self.handle_events()
+            self.go_first = 'COMPUTER'
+
     def run(self) -> None:
         """Launches the game"""
         self.draw_BG()
         while True:
+            self.make_moves()
+
             pygame.display.update()
-
-            self.computer()
-            self.handle_events()
-
             self.clock.tick(self.framerate)
 
 
