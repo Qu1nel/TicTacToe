@@ -15,7 +15,7 @@ from player import HumanPlayer, ComputerPlayer
 # ---------------------
 
 
-class TicTacToe(Interface):
+class TicTacToe(Interface, HumanPlayer, ComputerPlayer):
 
     def __init__(self):
         super().__init__()
@@ -68,7 +68,7 @@ class TicTacToe(Interface):
 
     def computer(self) -> None:
         """Makes a move for the opponent (computer)"""
-        if self.player == 1 and not self.game_over:
+        if not self.game_over:
             time.sleep(.5)
 
             if np.sum(self.board.get_board == 0) != 9:
@@ -76,10 +76,15 @@ class TicTacToe(Interface):
             else:
                 coordinates = random.randint(0, 8)
 
-            assert isinstance(coordinates, (int, float))
+            try:
+                assert isinstance(coordinates, (int, float))
 
-            clock_row, clock_col = coordinates // 3, coordinates % 3
-            self.update(clock_row, clock_col)
+            except AssertionError as e:
+                print(e)
+                print(type(coordinates))
+            else:
+                clock_row, clock_col = coordinates // 3, coordinates % 3
+                self.update(clock_row, clock_col)
 
     def draw_figures(self) -> None:
         """Draws shapes (cross, circle) relative to the state of the board"""
@@ -128,9 +133,10 @@ class TicTacToe(Interface):
         """Launches a new game"""
         self.draw_BG()
         self.board = GameBoard()
-        self.player = 1
+        self.player = 2
         self.game_over = False
         self.current_winner = None
+        self.go_first = GO_FIRST
 
     def update(self, row: int, col: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
@@ -150,9 +156,10 @@ class TicTacToe(Interface):
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over and self.player == 2:
+            if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                 clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
                 self.update(clock_row, clock_col)
+                self.go_first = 'COMPUTER'
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
@@ -164,7 +171,7 @@ class TicTacToe(Interface):
             self.go_first = 'PLAYER'
         else:
             self.handle_events()
-            self.go_first = 'COMPUTER'
+
 
     def run(self) -> None:
         """Launches the game"""
