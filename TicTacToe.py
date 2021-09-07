@@ -15,76 +15,17 @@ from player import HumanPlayer, ComputerPlayer
 # ---------------------
 
 
-class TicTacToe(Interface, HumanPlayer, ComputerPlayer):
+class TicTacToe(Interface):
 
     def __init__(self):
         super().__init__()
         self.player = 1
         self.go_first = GO_FIRST
-        self.TMP_player = HumanPlayer()
+        self.human_player = HumanPlayer()
         self.computer_player = ComputerPlayer()
         self.board = GameBoard()
 
-    def minimax(self, player: int) -> dict:
-        """Algorithm for tic-tac-toe, based on minimax"""
-        best_player = self.player
-        other_player = 1 if player == 2 else 2
 
-        if self.current_winner == other_player:  # first we want to check if the previous move is a winner
-            count_zeros = np.sum(self.board.get_board == 0) + 1
-            return dict(position=None, score=1 * count_zeros if other_player == best_player else -1 * count_zeros)
-
-        elif 0 not in self.board.get_board:
-            return dict(position=None, score=0)
-
-        if player == best_player:
-            best_move = dict(position=None, score=-math.inf)  # each score should maximize
-        else:
-            best_move = dict(position=None, score=math.inf)  # each score should minimize
-
-        straight_board = [digit for row in self.board.get_board for digit in row]
-        for possible_move in [indx for indx, digit in enumerate(straight_board) if digit == 0]:
-
-            self.board.mark_square(possible_move // 3, possible_move % 3, player)
-            if self.check_win(player, draw=False):
-                self.current_winner = player
-
-            sim_score = self.minimax(other_player)
-
-            # undo move
-            self.board[possible_move // 3][possible_move % 3] = 0
-            self.current_winner = None
-
-            sim_score['position'] = possible_move  # this represents the move optimal next move
-
-            if player == best_player:
-                if sim_score['score'] > best_move['score']:
-                    best_move = sim_score
-            else:
-                if sim_score['score'] < best_move['score']:
-                    best_move = sim_score
-
-        return best_move
-
-    def computer(self) -> None:
-        """Makes a move for the opponent (computer)"""
-        if not self.game_over:
-            time.sleep(.5)
-
-            if np.sum(self.board.get_board == 0) != 9:
-                coordinates = self.minimax(self.player)['position']  # MINIMAX
-            else:
-                coordinates = random.randint(0, 8)
-
-            try:
-                assert isinstance(coordinates, (int, float))
-
-            except AssertionError as e:
-                print(e)
-                print(type(coordinates))
-            else:
-                clock_row, clock_col = coordinates // 3, coordinates % 3
-                self.update(clock_row, clock_col)
 
     def draw_figures(self) -> None:
         """Draws shapes (cross, circle) relative to the state of the board"""
@@ -151,27 +92,24 @@ class TicTacToe(Interface, HumanPlayer, ComputerPlayer):
     def handle_events(self) -> None:
         """Handles actions entered by the player"""
         for event in pygame.event.get():
-
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                 clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
-                self.update(clock_row, clock_col)
-                self.go_first = 'COMPUTER'
+                if self.board.available_square(clock_row, clock_col):
+                    self.human_player.make_move(self, clock_row, clock_col)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self.restart()
 
     def make_moves(self) -> None:
-        if self.go_first == 'COMPUTER':
-            self.computer()
-            self.go_first = 'PLAYER'
-        else:
+        if self.go_first == 'COMPUTER' and not self.game_over:
+            self.computer_player.make_move(self)
+        elif self.go_first == 'PLAYER':
             self.handle_events()
-
 
     def run(self) -> None:
         """Launches the game"""

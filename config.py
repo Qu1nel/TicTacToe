@@ -8,8 +8,8 @@ SC_HEIGHT = 600
 CAPTION = 'TicTacToe'
 GO_FIRST = 'PLAYER'  # COMPUTER or PLAYER
 
-FIGURE_PLAYER = 'cross'
-FIGURE_COMPUTER = 'circle'
+FIGURE_PLAYER = ('cross', 1)
+FIGURE_COMPUTER = ('circle', 0)
 
 FRAME_RATE = 120
 
