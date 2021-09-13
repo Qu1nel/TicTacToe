@@ -21,18 +21,8 @@ class Game(object):
         self.current_winner = None
 
     @abstractmethod
-    def minimax(self, player: int) -> dict:
-        """Algorithm for tic-tac-toe, based on minimax"""
-        pass
-
-    @abstractmethod
-    def update(self, row: int, col: int) -> None:
+    def update(self, row: int, col: int, number_player: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
-        pass
-
-    @abstractmethod
-    def computer(self) -> None:
-        """Makes a move for the opponent (computer)"""
         pass
 
     @abstractmethod

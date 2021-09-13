@@ -14,7 +14,6 @@ class TicTacToe(Interface):
 
     def __init__(self):
         super().__init__()
-        self.player = 1
         self.go_first = GO_FIRST
         self.human_player = HumanPlayer()
         self.computer_player = ComputerPlayer()
@@ -52,13 +51,13 @@ class TicTacToe(Interface):
         # asc diagonal win check
         if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player):
             if draw:
-                self._draw_left_diagonal_line(self.player)
+                self._draw_left_diagonal_line(self.computer_player.number if player == 1 else 2)
             return True
 
         # desc diagonal win chek
         if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player):
             if draw:
-                self._draw_right_diagonal_line(self.player)
+                self._draw_right_diagonal_line(self.human_player.number if player == 1 else 2)
             return True
 
         return False
@@ -67,19 +66,17 @@ class TicTacToe(Interface):
         """Launches a new game"""
         self.draw_BG()
         self.board = GameBoard()
-        self.player = 2
         self.game_over = False
         self.current_winner = None
         self.go_first = GO_FIRST
 
-    def update(self, row: int, col: int) -> None:
+    def update(self, row: int, col: int, number_player: int) -> None:
         """Updates the table, renders it and checks if there is a victory"""
         if self.board.available_square(row, col):
-            self.board.mark_square(row, col, self.player)
-            if self.check_win(self.player, draw=True):
-                self.current_winner = self.player
+            self.board.mark_square(row, col, number_player)
+            if self.check_win(number_player, draw=True):
+                self.current_winner = number_player
                 self.game_over = True
-            self.player = self.player % 2 + 1
             self.draw_figures()
 
     def handle_events(self) -> None:
