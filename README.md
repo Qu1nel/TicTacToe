@@ -1,12 +1,21 @@
 # Tic-tac-toe
+
 First OOP Python project 💜
 
-Works in Python version 3.8+
-***
-To run, you need to install third-party modules (It is advisable to install the latest versions)
+There is a settings.txt file in the file directory, in which you can change the game settings. Such as:
 
-1. pygame
+1. Screen width
+2. Who goes first (player or computer)
+3. What is the player's shape (circle or cross)
 
-2. Numpy
-***
 To restart the game you need to press 'R'
+
+## Installation
+
+Requirements: Python 3.5+ (64-bit) with [pygame][doc-pygame] installed.
+
+```
+$ pip3 install -r requirements.txt
+```
+
+[doc-pygame]: https://www.pygame.org/docs/
