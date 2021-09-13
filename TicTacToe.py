@@ -51,13 +51,13 @@ class TicTacToe(Interface):
         # asc diagonal win check
         if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player):
             if draw:
-                self._draw_left_diagonal_line(self.computer_player.number if player == 1 else 2)
+                self._draw_left_diagonal_line(player)
             return True
 
         # desc diagonal win chek
         if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player):
             if draw:
-                self._draw_right_diagonal_line(self.human_player.number if player == 1 else 2)
+                self._draw_right_diagonal_line(player)
             return True
 
         return False

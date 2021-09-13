@@ -1,15 +1,42 @@
-# --------------
-# All graphic components of the game depending on the screen size (Width and Height)
-# P.S.(preferably the same value is a multiple of 3)
-# --------------
-SC_WIDTH = 600
-SC_HEIGHT = 600
+import json
+
+
+def init_vars(source: dict) -> None:
+    global SC_WIDTH, SC_HEIGHT, GO_FIRST, FIGURE_PLAYER, FIGURE_COMPUTER
+    SC_WIDTH = SC_HEIGHT = source['width_window']
+    GO_FIRST = source['first_move'].upper()
+    fig = source['figure_player']
+    FIGURE_PLAYER = (fig, 2 if fig == 'cross' else 1)
+    FIGURE_COMPUTER = ('cross' if fig == 'circle' else 'circle', FIGURE_PLAYER[1] % 2 + 1)
+
+
+DEFAULT_SETT = {'first_move': 'COMPUTER', 'figure_player': 'cross', 'width_window': 600}
+
+SC_WIDTH = None
+SC_HEIGHT = None
 
 CAPTION = 'TicTacToe'
-GO_FIRST = 'COMPUTER'  # COMPUTER or PLAYER
+GO_FIRST = None  # COMPUTER or PLAYER
 
-FIGURE_PLAYER = ('cross', 2)
-FIGURE_COMPUTER = ('circle', 1)
+FIGURE_PLAYER = None  # ('cross', 2)
+FIGURE_COMPUTER = None  # ('circle', 1)
+
+with open('settings.txt', 'r') as f, open('main_settings.json', 'w') as data_file:
+    things = ('first_move', 'figure_player', 'width_window')
+    values = []
+    for line in f:
+        if ':' in line:
+            data = line[line.index(':') + 1:].strip().lower()
+            values.append(int(data) if data.isdigit() else data)
+
+    try:
+        data = dict(zip(things, values))
+        assert len(data) == 3
+    except AssertionError:
+        data = DEFAULT_SETT
+
+    init_vars(data)
+    json.dump(data, data_file)
 
 FRAME_RATE = 120
 
