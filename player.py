@@ -37,8 +37,7 @@ class ComputerPlayer(Player):
     def __init__(self):
         super().__init__(FIGURE_COMPUTER)
 
-    @staticmethod
-    def minimax(game: Game, player: int) -> dict:
+    def minimax(self, game: Game, player: int) -> dict:
         """Algorithm for tic-tac-toe, based on minimax"""
         best_player = game.player
         other_player = 1 if player == 2 else 2
@@ -55,18 +54,18 @@ class ComputerPlayer(Player):
         else:
             best_move = dict(position=None, score=math.inf)  # each score should minimize
 
-        straight_board = [digit for row in self.board.get_board for digit in row]
+        straight_board = [digit for row in game.board.get_board for digit in row]
         for possible_move in [indx for indx, digit in enumerate(straight_board) if digit == 0]:
 
             game.board.mark_square(possible_move // 3, possible_move % 3, player)
             if game.check_win(player, draw=False):
                 game.current_winner = player
 
-            sim_score = self.minimax(other_player)
+            sim_score = self.minimax(game, other_player)
 
             # undo move
-            self.board[possible_move // 3][possible_move % 3] = 0
-            self.current_winner = None
+            game.board[possible_move // 3][possible_move % 3] = 0
+            game.current_winner = None
 
             sim_score['position'] = possible_move  # this represents the move optimal next move
 
@@ -85,7 +84,7 @@ class ComputerPlayer(Player):
             time.sleep(.2)
 
             if np.sum(game.board.get_board == 0) != 9:
-                coordinates = game.minimax(game, game.player)['position']  # MINIMAX
+                coordinates = self.minimax(game, game.player)['position']  # MINIMAX
             else:
                 coordinates = random.randint(0, 8)
 

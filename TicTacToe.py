@@ -10,11 +10,6 @@ from board import GameBoard
 from player import HumanPlayer, ComputerPlayer
 
 
-# ---------------------
-# It is necessary to add the Player classes and from them make the PlayerHuman and ComputerPlayer classes
-# ---------------------
-
-
 class TicTacToe(Interface):
 
     def __init__(self):
@@ -24,8 +19,6 @@ class TicTacToe(Interface):
         self.human_player = HumanPlayer()
         self.computer_player = ComputerPlayer()
         self.board = GameBoard()
-
-
 
     def draw_figures(self) -> None:
         """Draws shapes (cross, circle) relative to the state of the board"""
