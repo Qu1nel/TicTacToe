@@ -1,4 +1,7 @@
 import json
+import os
+
+APP_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 def init_vars(source: dict) -> None:
@@ -21,7 +24,7 @@ GO_FIRST = None  # COMPUTER or PLAYER
 FIGURE_PLAYER = None  # ('cross', 2)
 FIGURE_COMPUTER = None  # ('circle', 1)
 
-with open('settings.txt', 'r') as f, open('main_settings.json', 'w') as data_file:
+with open(f'{APP_PATH}/settings.txt', 'r') as f, open(f'{APP_PATH}/main_settings.json', 'w') as data_file:
     things = ('first_move', 'figure_player', 'width_window')
     values = []
     for line in f:
