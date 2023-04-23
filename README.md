@@ -43,7 +43,6 @@ To restart the game you need to press '**R**'
 
 - [Qu1nel](https://github.com/Qu1nel)
 
-
-## License
-
-Project Qu1nel.TicTacToe is distributed under the [MIT license](LICENSE).
+License
+---
+This Project Qu1nel.TicTacToe in distributive under the __[MIT License](./LICENSE)__, and it also uses those codes that are distributed under the __[MIT License](./LICENSE)__.
