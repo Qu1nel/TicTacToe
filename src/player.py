@@ -5,8 +5,8 @@ from abc import abstractmethod
 
 import numpy as np
 
-from game import Game
-from config import FIGURE_PLAYER, FIGURE_COMPUTER
+from src.config import FIGURE_COMPUTER, FIGURE_PLAYER
+from src.game import Game
 
 
 class Player(object):

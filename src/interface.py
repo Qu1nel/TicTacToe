@@ -1,12 +1,12 @@
-from typing import Union
 from abc import abstractmethod
+from typing import Union
 
 import pygame as pg
 
-import colors
-import config as c
-from config import SPACE
-from game import Game
+import src.colors as colors
+import src.config as c
+from src.config import SPACE
+from src.game import Game
 
 
 class Interface(Game):

@@ -1,13 +1,15 @@
-import sys
 import math
-import time
 import random
-import pygame
+import sys
+import time
+
 import numpy as np
-from config import GO_FIRST
-from interface import Interface
-from board import GameBoard
-from player import HumanPlayer, ComputerPlayer
+import pygame
+
+from src.board import GameBoard
+from src.config import GO_FIRST
+from src.interface import Interface
+from src.player import ComputerPlayer, HumanPlayer
 
 
 class TicTacToe(Interface):
@@ -87,7 +89,8 @@ class TicTacToe(Interface):
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
-                clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
+                clock_row, clock_col = int(
+                    event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
                 if self.board.available_square(clock_row, clock_col):
                     self.human_player.make_move(self, clock_row, clock_col)
 
@@ -114,6 +117,3 @@ class TicTacToe(Interface):
 def main():
     TicTacToe().run()
 
-
-if __name__ == '__main__':
-    main()

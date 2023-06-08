@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import ndarray
 
-import config as con
+import src.config as con
 
 
 class GameBoard(object):
