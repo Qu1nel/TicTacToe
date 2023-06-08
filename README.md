@@ -28,6 +28,19 @@ All python dependencies specified in the file [requirements.txt](/requirements.t
     pip install -r requirements.txt
 
 
+## Getting started
+
+Run `run.py ` using the python interpreter
+
+### Windows
+    
+    python run.py
+
+### Linux
+
+    python3 run.py
+
+
 ## Documentation
 
 there is a <u>*settings.txt*</u> file in the file directory, in which you can change the game settings. such as:
