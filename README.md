@@ -30,7 +30,7 @@ All python dependencies specified in the file [requirements.txt](/requirements.t
 
 ## Getting started
 
-Run `run.py ` using the python interpreter
+Run `run.py` using the python interpreter
 
 ### Windows
     
