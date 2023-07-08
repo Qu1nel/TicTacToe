@@ -28,7 +28,7 @@
 </p>
 
 <p>
-  <a href="https://www.python.org/downloads/release/python-390/" target="_blank" >
+  <a href="https://www.python.org/downloads/release/python-390/" >
     <img src="https://img.shields.io/badge/Python-3.9%2B-blueviolet" alt="python Version" />
   <a>
   <a href="https://github.com/Qu1nel/TicTacToe/releases/">
