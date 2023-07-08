@@ -140,7 +140,7 @@ python3 run.py
 
 ## Documentation
 
-there is a <u>*settings.txt*</u> file in the file directory, in which you can change the game settings. such as:
+There is a <u>*[settings.txt](./src/settings.txt)*</u> file in the file directory, in which you can change the game settings. such as:
 
 1. Screen width
 2. Who goes first (player or computer)
@@ -155,4 +155,4 @@ To restart the game you need to press '**R**'
 
 ## License
 
-This Project Qu1nel.TicTacToe in distributive under the __[MIT License](./LICENSE)__, and it also uses those codes that are distributed under the __[MIT License](./LICENSE)__.
+This Project Qu1nel.TicTacToe in distributive under the **[MIT License](./LICENSE)**, and it also uses those codes that are distributed under the **[MIT License](./LICENSE)**.
