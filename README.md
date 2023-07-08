@@ -102,7 +102,7 @@ All python dependencies specified in the file [requirements.txt](./requirements.
 pip install -r requirements.txt
 ```
 
-Install with make:
+Install requirements with make:
 
 ```bash
 make install-requirements
@@ -117,11 +117,10 @@ git clone https://github.com/Qu1nel/TicTacToe.git
 cd TicTacToe/
 ```
 
-If you have the `make` installed, you can immediately create and activate a virtual environment:
+If you have the `make` installed, you can immediately create and activate a virtual environment with requirements:
 
 ```bash
-make create-venv
-make run
+make start
 ```
 
 Or you can simply run `run.py` using the python interpreter
@@ -148,6 +147,19 @@ There is a <u>*[settings.txt](./src/settings.txt)*</u> file in the file director
 
 To restart the game you need to press '**R**'
 
+For full help with make commands, you can use the command:
+
+```bash linenums="$"
+make help
+```
+
+```py linenums="(venv)$"
+def bubble_sort(items):
+    for i in range(len(items)):
+        for j in range(len(items) - 1 - i):
+            if items[j] > items[j + 1]:
+                items[j], items[j + 1] = items[j + 1], items[j]
+```
 
 ## Developers
 
