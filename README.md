@@ -40,11 +40,11 @@
 </p>
   
 <h4>
-  <a href="">View Demo</a>
+  <a href="#view-demo">View Demo</a>
   <span> · </span>
-  <a href="">Documentation</a>
+  <a href="#documentation">Documentation</a>
   <span> · </span>
-  <a href="https://github.com/Qu1nle/TicTacToe/issues/">Report Bug</a>
+  <a href="https://github.com/Qu1nel/TicTacToe/issues/">Report Bug</a>
   <span> · </span>
   <a href="https://github.com/Qu1nel/TicTacToe/issues/">Request Feature</a>
 </h4>
@@ -74,7 +74,7 @@ The first OOP python project 💜
 ### View demo
 
 <div align="center">
-  <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/view_demo.gif" alt="gif-demo"/>
+  <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/view_demo.gif" alt="gif_demo" />
 </div>
 
 ### Screenshots
@@ -84,7 +84,7 @@ The first OOP python project 💜
   <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/preview_2.png" alt="preview_2" />
 </div>
 
-## Installation>
+## Installation
 
 Clone the repository and run the file `run.py`.
 Make sure that all [requirements](#requirements) are met.
