@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/tictactoe_logo.png" alt="logo" width="200" height="auto" />
+  <img src="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/tictactoe_logo.png" alt="logo" width="200px" height="auto" />
   <h1>Tic Tac Toe</h1>
 
   <p>
@@ -11,7 +11,7 @@
   <a href="https://github.com/Qu1nel/TicTacToe/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/Qu1nel/TicTacToe" alt="contributors" />
   </a>
-  <a href="#">
+  <a href="https://github.com/Qu1nel/TicTacToe/commits/main">
     <img src="https://img.shields.io/github/last-commit/Qu1nel/TicTacToe" alt="last update" />
   </a>
   <a href="https://github.com/Qu1nel/TicTacToe/network/members">
@@ -71,18 +71,20 @@
 
 The first OOP python project 💜
 
-### View demo
+<details>
+  <summary><h3 id="view-demo">View demo</h3></summary>
+  <div align="center">
+    <img src="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/view_demo.gif" alt="gif_demo" width="500px" />
+  </div>
+</details>
 
-<div align="center">
-  <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/view_demo.gif" alt="gif_demo" />
-</div>
-
-### Screenshots
-
-<div align="center">
-  <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/preview_1.png" alt="preview_1" />
-  <img href="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/preview_2.png" alt="preview_2" />
-</div>
+<details>
+  <summary><h3 id="screenshots">Screenshots</h3></summary>
+  <div align="center">
+    <img src="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/preview_1.png" alt="preview_1" width="350px" />
+    <img src="https://github.com/Qu1nel/TicTacToe/blob/git-page/git-source/preview_2.png" alt="preview_2" width="350px" />
+  </div>
+</details>
 
 ## Installation
 
