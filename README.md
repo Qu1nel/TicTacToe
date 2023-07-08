@@ -98,34 +98,45 @@ _The Python interpreter version 3.9+_
 
 All python dependencies specified in the file [requirements.txt](./requirements.txt)
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 Install with make:
 
-    make install-requirements
+```bash
+make install-requirements
+```
 
 ### Getting started
 
 Clone this repository and navigate to it with the command:
 
-    git clone https://github.com/Qu1nel/TicTacToe.git
-    cd TicTacToe/
+```bash
+git clone https://github.com/Qu1nel/TicTacToe.git
+cd TicTacToe/
+```
 
 If you have the `make` installed, you can immediately create and activate a virtual environment:
 
-    make create-venv
-    make run
+```bash
+make create-venv
+make run
+```
 
 Or you can simply run `run.py` using the python interpreter
 
 #### Windows
-    
-    python run.py
+
+```powershell
+python run.py
+```
 
 #### Linux
 
-    python3 run.py
-
+```bash
+python3 run.py
+```
 
 ## Documentation
 
