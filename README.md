@@ -149,16 +149,8 @@ To restart the game you need to press '**R**'
 
 For full help with make commands, you can use the command:
 
-```bash linenums="$"
+```bash
 make help
-```
-
-```py linenums="(venv)$"
-def bubble_sort(items):
-    for i in range(len(items)):
-        for j in range(len(items) - 1 - i):
-            if items[j] > items[j + 1]:
-                items[j], items[j + 1] = items[j + 1], items[j]
 ```
 
 ## Developers
