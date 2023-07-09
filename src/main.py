@@ -85,7 +85,7 @@ class TicTacToe(Interface):
 
     def restart(self) -> None:
         """Launch a new game."""
-        self.draw_BG()
+        self.draw_back_ground()
         self.board = GameBoard()
         self.game_over = False
         self.current_winner = None
@@ -125,7 +125,7 @@ class TicTacToe(Interface):
 
     def run(self) -> None:
         """Launch the game."""
-        self.draw_BG()
+        self.draw_back_ground()
         while True:
             self.make_moves()
 

@@ -1,25 +1,34 @@
+import sys
 from abc import abstractmethod
-from typing import Union
 
 import pygame as pg
 
-import src.colors as colors
 import src.config as c
+from src import colors
 from src.config import SPACE
 from src.game import Game
 
 
 class Interface(Game):
+    """Interface class."""
+
     sq_size: int
     ln_width: int
     win_ln_width: int
-    crcl_color: Union[tuple[int], str, list[int]]
-    crss_color: Union[tuple[int], str, list[int]]
+    crcl_color: tuple[int] | str | list[int]
+    crss_color: tuple[int] | str | list[int]
     crss_width: int
     crcl_width: int
     crcl_rad: int
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Init Interface instance and game class."""
+        try:
+            assert isinstance(c.SC_WIDTH, int)
+            assert isinstance(c.SC_HEIGHT, int)
+        except AssertionError:
+            sys.exit(1)
+
         super().__init__(c.CAPTION, c.SC_WIDTH, c.SC_HEIGHT, c.FRAME_RATE)
         self.sq_size = c.SQUARE_SIZE
         self.ln_width = c.LINE_WIDTH
@@ -30,14 +39,14 @@ class Interface(Game):
         self.crcl_width = c.CIRCLE_WIDTH
         self.crcl_rad = c.CIRCLE_RADIUS
 
-    def draw_BG(self) -> None:
-        """Draws the background"""
+    def draw_back_ground(self) -> None:
+        """Draws the background."""
         self.screen.fill(colors.BG_COLOR)
         self._draw_lines()
         pg.display.update()
 
     def _draw_lines(self) -> None:
-        """Draws the lines for BG"""
+        """Draws the lines for BG."""
         # horizontals
         pg.draw.line(surface=self.screen, color=colors.BG_LINE_COLOR,
                      start_pos=(0, self.sq_size), end_pos=(self.width, self.sq_size),
@@ -54,13 +63,13 @@ class Interface(Game):
                      width=self.win_ln_width)
 
     def _draw_circle(self, row: int, col: int) -> None:
-        """draws a circle no the game board"""
+        """Draws a circle no the game board."""
         pg.draw.circle(surface=self.screen, color=self.crcl_color,
                        center=(col * self.sq_size + self.sq_size // 2, row * self.sq_size + self.sq_size // 2),
                        radius=self.crcl_rad, width=self.crcl_width)
 
     def _draw_cross(self, row: int, col: int) -> None:
-        """draws a cross no the game board"""
+        """Draws a cross no the game board."""
         pg.draw.line(surface=self.screen, color=self.crss_color,
                      start_pos=(col * self.sq_size + SPACE, row * self.sq_size + self.sq_size - SPACE),
                      end_pos=(col * self.sq_size + self.sq_size - SPACE, row * self.sq_size + SPACE),
@@ -72,28 +81,27 @@ class Interface(Game):
                      width=self.crss_width)
 
     def _draw_vertical_winning_line(self, col: int, player: int) -> None:  # 12px is the indentation
-        """Draws a vertical line after winning"""
+        """Draws a vertical line after winning."""
         pos_x = col * self.sq_size + self.sq_size // 2
         color = self.crcl_color if player == 1 else self.crss_color
         pg.draw.line(self.screen, color, (pos_x, 12), (pos_x, self.height - 12), self.win_ln_width)
 
     def _draw_horizontal_winning_line(self, row: int, player: int) -> None:  # 12px is the indentation
-        """Draws a horizontal line after winning"""
+        """Draws a horizontal line after winning."""
         pos_y = row * self.sq_size + self.sq_size // 2
         color = self.crcl_color if player == 1 else self.crss_color
         pg.draw.line(self.screen, color, (12, pos_y), (self.height - 12, pos_y), self.win_ln_width)
 
     def _draw_left_diagonal_line(self, player: int) -> None:  # 12px is the indentation
-        """Draws a left diagonal (Top left) line after winning"""
+        """Draws a left diagonal (Top left) line after winning."""
         color = self.crcl_color if player == 1 else self.crss_color
         pg.draw.line(self.screen, color, (12, self.height - 12), (self.width - 12, 12), self.win_ln_width)
 
     def _draw_right_diagonal_line(self, player: int) -> None:  # 12px is the indentation
-        """Draws a right diagonal (Top right) line after winning"""
+        """Draws a right diagonal (Top right) line after winning."""
         color = self.crcl_color if player == 1 else self.crss_color
         pg.draw.line(self.screen, color, (12, 12), (self.width - 12, self.height - 12), self.win_ln_width)
 
     @abstractmethod
     def draw_figures(self) -> None:
-        """Draws the main figures (circle and cross)"""
-        pass
+        """Draws the main figures (circle and cross)."""
