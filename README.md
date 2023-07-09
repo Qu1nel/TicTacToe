@@ -28,8 +28,8 @@
 </p>
 
 <p>
-  <a href="https://www.python.org/downloads/release/python-390/" >
-    <img src="https://img.shields.io/badge/Python-3.9%2B-blueviolet" alt="python Version" />
+  <a href="https://www.python.org/downloads/release/python-3110/" >
+    <img src="https://img.shields.io/badge/Python-3.11%2B-blueviolet" alt="python Version" />
   <a>
   <a href="https://github.com/Qu1nel/TicTacToe/releases/">
     <img src="https://img.shields.io/github/v/release/Qu1nel/TicTacToe" alt="project version" />
@@ -94,7 +94,7 @@ Make sure that all [requirements](#requirements) are met.
 
 ### Requirements
 
-_The Python interpreter version 3.9+_
+_The Python interpreter version 3.11+_
 
 All python dependencies specified in the file [requirements.txt](./requirements.txt)
 
