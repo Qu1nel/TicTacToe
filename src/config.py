@@ -1,40 +1,48 @@
 import json
-import os
+from pathlib import Path
+from typing import Final
 
-APP_PATH = os.path.dirname(os.path.realpath(__file__))
+APP_PATH = Path(__file__).resolve().parent
+
+
+DEFAULT_SETT = {"first_move": "COMPUTER", "figure_player": "cross", "width_window": 600}
+
+SC_WIDTH: int | None = 0
+SC_HEIGHT: int | None = 0
+
+CAPTION = "TicTacToe"
+GO_FIRST: str | None = ""  # COMPUTER or PLAYER
+
+FIGURE_PLAYER: tuple[str, int] | None = None  # ('cross', 2)
+FIGURE_COMPUTER: tuple[str, int] | None = None  # ('circle', 1)
+
+LENTH_BOARD: Final[int] = 3
 
 
 def init_vars(source: dict) -> None:
+    """Init vars for game."""
     global SC_WIDTH, SC_HEIGHT, GO_FIRST, FIGURE_PLAYER, FIGURE_COMPUTER
-    SC_WIDTH = SC_HEIGHT = source['width_window']
-    GO_FIRST = source['first_move'].upper()
-    fig = source['figure_player']
-    FIGURE_PLAYER = (fig, 2 if fig == 'cross' else 1)
-    FIGURE_COMPUTER = ('cross' if fig == 'circle' else 'circle', FIGURE_PLAYER[1] % 2 + 1)
+
+    SC_WIDTH = source["width_window"]
+    SC_HEIGHT = source["width_window"]
+    GO_FIRST = source["first_move"].upper()
+
+    fig = source["figure_player"]
+    FIGURE_PLAYER = (fig, 2 if fig == "cross" else 1)
+    FIGURE_COMPUTER = ("cross" if fig == "circle" else "circle", FIGURE_PLAYER[1] % 2 + 1)
 
 
-DEFAULT_SETT = {'first_move': 'COMPUTER', 'figure_player': 'cross', 'width_window': 600}
-
-SC_WIDTH = None
-SC_HEIGHT = None
-
-CAPTION = 'TicTacToe'
-GO_FIRST = None  # COMPUTER or PLAYER
-
-FIGURE_PLAYER = None  # ('cross', 2)
-FIGURE_COMPUTER = None  # ('circle', 1)
-
-with open(f'{APP_PATH}/settings.txt', 'r') as f, open(f'{APP_PATH}/main_settings.json', 'w') as data_file:
-    things = ('first_move', 'figure_player', 'width_window')
+with open(f"{APP_PATH}/settings.txt") as f, open(f"{APP_PATH}/main_settings.json", "w") as data_file:
+    things = ("first_move", "figure_player", "width_window")
     values = []
     for line in f:
-        if ':' in line:
-            data = line[line.index(':') + 1:].strip().lower()
+        if ":" in line:
+            data = line[line.index(":") + 1:].strip().lower()
             values.append(int(data) if data.isdigit() else data)
 
     try:
-        data = dict(zip(things, values))
-        assert len(data) == 3
+        data = dict(zip(things, values, strict=False))
+        assert len(data) == LENTH_BOARD
     except AssertionError:
         data = DEFAULT_SETT
 
