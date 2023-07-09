@@ -127,7 +127,7 @@ clean:  ## Clear linter cache (.mypy_cache .ruff_cache)
 
 .PHONY: help
 help:  ## Show this output, i.e. help to use the commands
-	grep -E '^[a-zA-Z_-]+:.*?# .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?# "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	grep -E '^[a-zA-Z_-]+:.*?# .*$$' Makefile | awk 'BEGIN {FS = ":.*?# "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 
 info-%:
