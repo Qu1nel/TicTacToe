@@ -1,4 +1,4 @@
-""" Just RGB colors in tuples :3 """
+"""Just RGB colors in tuples :3."""
 
 BG_COLOR = (155, 89, 182)
 BG_LINE_COLOR = (142, 68, 173)
