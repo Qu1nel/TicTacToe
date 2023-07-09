@@ -2,6 +2,7 @@ import sys
 from typing import Final
 
 import pygame
+
 from src.board import GameBoard
 from src.config import GO_FIRST
 from src.interface import Interface
@@ -77,8 +78,10 @@ class TicTacToe(Interface):
             The True if Victory else False
         """
         check_func = (
-            self._check_vertival_win, self._check_horizontal_win,
-            self._check_asc_diagonal_win, self._check_desc_diagonal_win,
+            self._check_vertival_win,
+            self._check_horizontal_win,
+            self._check_asc_diagonal_win,
+            self._check_desc_diagonal_win,
         )
         return any(func(player, draw) for func in check_func)
 
@@ -87,7 +90,7 @@ class TicTacToe(Interface):
         self.draw_back_ground()
         self.board = GameBoard()
         self.game_over = False
-        self.current_winner = None
+        self.current_winner = -1
         self.go_first = GO_FIRST
 
     def update(self, row: int, col: int, number_player: int) -> None:
@@ -107,8 +110,7 @@ class TicTacToe(Interface):
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
-                clock_row, clock_col = int(
-                    event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
+                clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
                 if self.board.available_square(clock_row, clock_col):
                     self.human_player.make_move(self, clock_row, clock_col)
 

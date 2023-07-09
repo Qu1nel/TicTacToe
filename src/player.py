@@ -1,10 +1,10 @@
 import math
 import random
 import time
-from abc import abstractmethod
 from typing import Final
 
 import numpy as np
+
 from src.config import FIGURE_COMPUTER, FIGURE_PLAYER
 from src.game import Game
 
@@ -17,7 +17,7 @@ MAX_SUM: Final[int] = 9
 class Player:
     """Player class."""
 
-    def __init__(self, badge: tuple[str, int]):
+    def __init__(self, badge: tuple[str, int]) -> None:
         """Each player has a badge who he is (cross / circle)."""
         if len(badge) != COUNT_PLAYERS:
             msg = "badge must include two values! {name figure (cross or circle), number (1 or 2)"
@@ -29,10 +29,6 @@ class Player:
             msg = "The first value must be a string"
             raise TypeError(msg)
         self.figure, self.number = badge
-
-    @abstractmethod
-    def make_move(self, *args, **kwargs) -> None:
-        """Chooses who makes the move."""
 
 
 class HumanPlayer(Player):
@@ -70,11 +66,11 @@ class ComputerPlayer(Player):
         if player == best_player:
             best_move = {"position": None, "score": -math.inf}  # each score should maximize
         else:
-            best_move = {"position": None, "score": math.inf}  # each score should minimize
+            # each score should minimize
+            best_move = {"position": None, "score": math.inf}
 
         straight_board = [digit for row in game.board.get_board for digit in row]
         for possible_move in [indx for indx, digit in enumerate(straight_board) if digit == 0]:
-
             game.board.mark_square(possible_move // 3, possible_move % 3, player)
             if game.check_win(player, draw=False):
                 game.current_winner = player
@@ -83,9 +79,10 @@ class ComputerPlayer(Player):
 
             # undo move
             game.board[possible_move // 3][possible_move % 3] = 0
-            game.current_winner = None
+            game.current_winner = -1
 
-            sim_score["position"] = possible_move  # this represents the move optimal next move
+            # this represents the move optimal next move
+            sim_score["position"] = possible_move
 
             if player == best_player:
                 if sim_score["score"] > best_move["score"]:
@@ -98,7 +95,7 @@ class ComputerPlayer(Player):
     def make_move(self, game: Game) -> None:
         """Make a move for the opponent (computer)."""
         if not game.game_over:
-            time.sleep(.2)
+            time.sleep(0.2)
 
             if np.sum(game.board.get_board == 0) != MAX_SUM:
                 coordinates = self.minimax(game, self.number)["position"]  # MINIMAX

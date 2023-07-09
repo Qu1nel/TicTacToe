@@ -2,6 +2,8 @@ from abc import abstractmethod
 
 import pygame
 
+from src.board import GameBoard
+
 
 class Game:
     """A class with all the main attributes of the game (game window)."""
@@ -10,6 +12,8 @@ class Game:
     width: int
     height: int
     framerate: int
+    board: GameBoard
+    go_first: str
 
     def __init__(self, caption: str, width: int, height: int, framerate: int = 60) -> None:
         """Init Game instance."""
@@ -21,7 +25,7 @@ class Game:
         self.width = width
         self.height = height
         self.game_over = False
-        self.current_winner = None
+        self.current_winner = -1
 
     @abstractmethod
     def update(self, row: int, col: int, number_player: int) -> None:
@@ -34,6 +38,10 @@ class Game:
     @abstractmethod
     def restart(self) -> None:
         """Launch a new game."""
+
+    @abstractmethod
+    def check_win(self, player: int, draw: bool = True) -> bool:
+        """Check win."""
 
     def run(self) -> None:
         """Launch the game."""

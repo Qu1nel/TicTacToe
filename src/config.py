@@ -1,20 +1,23 @@
 import json
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 APP_PATH = Path(__file__).resolve().parent
 
+DEFAULT_SETT = {
+    "first_move": "COMPUTER",
+    "figure_player": "cross",
+    "width_window": 600,
+}
 
-DEFAULT_SETT = {"first_move": "COMPUTER", "figure_player": "cross", "width_window": 600}
-
-SC_WIDTH: int | None = 0
-SC_HEIGHT: int | None = 0
+SC_WIDTH: int = 0
+SC_HEIGHT: int = 0
 
 CAPTION = "TicTacToe"
-GO_FIRST: str | None = ""  # COMPUTER or PLAYER
+GO_FIRST: str = ""  # COMPUTER or PLAYER
 
-FIGURE_PLAYER: tuple[str, int] | None = None  # ('cross', 2)
-FIGURE_COMPUTER: tuple[str, int] | None = None  # ('circle', 1)
+FIGURE_PLAYER: tuple[str, int] = ("cross", 2)
+FIGURE_COMPUTER: tuple[str, int] = ("circle", 1)
 
 LENTH_BOARD: Final[int] = 3
 
@@ -34,11 +37,11 @@ def init_vars(source: dict) -> None:
 
 with open(f"{APP_PATH}/settings.txt") as f, open(f"{APP_PATH}/main_settings.json", "w") as data_file:
     things = ("first_move", "figure_player", "width_window")
-    values = []
+    values: list[Any] = []
     for line in f:
         if ":" in line:
-            data = line[line.index(":") + 1:].strip().lower()
-            values.append(int(data) if data.isdigit() else data)
+            data_line = line[line.index(":") + 1 :].strip().lower()
+            values.append(int(data_line) if data_line.isdigit() else data_line)
 
     try:
         data = dict(zip(things, values, strict=False))
