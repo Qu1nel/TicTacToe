@@ -5,7 +5,6 @@ from abc import abstractmethod
 from typing import Final
 
 import numpy as np
-
 from src.config import FIGURE_COMPUTER, FIGURE_PLAYER
 from src.game import Game
 

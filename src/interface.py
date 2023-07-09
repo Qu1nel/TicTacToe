@@ -2,7 +2,6 @@ import sys
 from abc import abstractmethod
 
 import pygame as pg
-
 import src.config as c
 from src import colors
 from src.config import SPACE

@@ -2,7 +2,6 @@ import sys
 from typing import Final
 
 import pygame
-
 from src.board import GameBoard
 from src.config import GO_FIRST
 from src.interface import Interface

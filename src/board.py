@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-
 import src.config as con
 
 
