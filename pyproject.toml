@@ -49,12 +49,17 @@ ignore = [
     "PYI024", # Check use collections.nametuple
     # RET (flake8-return)
     "RET504", # Check vars which that immediately precede a return eq assign var
+    # PTH (flake8-use-pathlib)
+    "PTH123", # Check open() instead Path.open()
     # TD (flake8-todos)
     "TD002", # Check TODO comments includes an author
     "TD002", # Check TODO comments includes a links
     # PGH (pygrep-hooks)
     "PGH003", # Check 'type: ignore' without annotation warn are intended to be suppressed
     "PGH004", # Check 'noqa' without annotation diagnostics are intended to be suppressed
+
+    # For this project
+    "PLW0603", # Using global statemtn to update
 ]
 
 [tool.ruff.flake8-annotations]
