@@ -1,0 +1,51 @@
+[project]
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+select = ["ALL"]
+ignore = [
+    # D (pydocstyle)
+    "D100", # Docstring in public module
+    "D203", # Docstring one blank line before class
+    "D213", # Docstring multi-line-summary-second-line
+    # AHH (flake8-annotations)
+    "ANN002", # Docstring missing-type-args
+    "ANN003", # Docstring missing-type-kwargs
+    "ANN101", # Docstring missing-type-self
+    "ANN102", # Docstring missing-type-cls
+    "ANN401", # Docstring Any type
+    # S (flake8-bandit)
+    "S101", # Detected assert statement
+    "S311", # Detected pseudo-random generators
+    # FBT (flake8-boolean-trap)
+    "FBT001", # Detected boolean positional arg in functions
+    "FBT002", # Detected boolean default value in functions
+    # B (flake8-bugbear)
+    "B006", # Detected mutable arg default
+    "B009", # Detected getattr(obj, ...)
+    "B010", # Detected setattr(obj, ..., ...)
+    # INP (flake8-no-pep420)
+    "INP001", # Check missing __init__.py in packages
+    # PIE (flake8-pie)
+    "PIE796", # Check for enums that contain duplicate values
+    # T (flake8-print)
+    "T201", # Check for print statement
+    "T203", # Check for pprint statement
+    # PYI (flake8-pyi)
+    "PYI001", # Check that type TypeVar, ... def in stubs are prefixed with _
+    "PYI024", # Check use collections.nametuple
+    # RET (flake8-return)
+    "RET504", # Check vars which that immediately precede a return eq assign var
+    # TD (flake8-todos)
+    "TD002", # Check TODO comments includes an author
+    "TD002", # Check TODO comments includes a links
+    # PGH (pygrep-hooks)
+    "PGH003", # Check 'type: ignore' without annotation warn are intended to be suppressed
+    "PGH004", # Check 'noqa' without annotation diagnostics are intended to be suppressed
+]
+
+[tool.ruff.flake8-annotations]
+mypy-init-return = true  # Check return type from __init__ (__new__, __call__)
+
