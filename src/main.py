@@ -32,6 +32,38 @@ class TicTacToe(Interface):
                 elif self.board[row][col] == CROSS:
                     self._draw_cross(row, col)
 
+    def _check_vertival_win(self, player: int, draw: bool) -> bool:
+        for col in range(self.board.cols):  # vertical win check
+            if (self.board[0][col], self.board[1][col], self.board[2][col]) == (player, player, player):
+                if draw:
+                    self._draw_vertical_winning_line(col, player)
+                return True
+        return False
+
+    def _check_horizontal_win(self, player: int, draw: bool) -> bool:
+        for row in range(self.board.rows):  # horizontal win check
+            if (self.board[row][0], self.board[row][1], self.board[row][2]) == (player, player, player):
+                if draw:
+                    self._draw_horizontal_winning_line(row, player)
+                return True
+        return False
+
+    def _check_asc_diagonal_win(self, player: int, draw: bool) -> bool:
+        # asc diagonal win check
+        if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player):
+            if draw:
+                self._draw_left_diagonal_line(player)
+            return True
+        return False
+
+    def _check_desc_diagonal_win(self, player: int, draw: bool) -> bool:
+        # desc diagonal win chek
+        if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player):
+            if draw:
+                self._draw_right_diagonal_line(player)
+            return True
+        return False
+
     def check_win(self, player: int, draw: bool = True) -> bool:
         """Draws a line in case of victory.
 
@@ -43,30 +75,13 @@ class TicTacToe(Interface):
 
         Returns:
         -------
-            The True if else False
-
+            The True if Victory else False
         """
-        for col in range(self.board.cols):  # vertical win check
-            if (self.board[0][col], self.board[1][col], self.board[2][col]) == (player, player, player) and draw:
-                self._draw_vertical_winning_line(col, player)
-                return True
-
-        for row in range(self.board.rows):  # horizontal win check
-            if (self.board[row][0], self.board[row][1], self.board[row][2]) == (player, player, player) and draw:
-                self._draw_horizontal_winning_line(row, player)
-                return True
-
-        # asc diagonal win check
-        if (self.board[2][0], self.board[1][1], self.board[0][2]) == (player, player, player) and draw:
-            self._draw_left_diagonal_line(player)
-            return True
-
-        # desc diagonal win chek
-        if (self.board[0][0], self.board[1][1], self.board[2][2]) == (player, player, player) and draw:
-            self._draw_right_diagonal_line(player)
-            return True
-
-        return False
+        check_func = (
+            self._check_vertival_win, self._check_horizontal_win,
+            self._check_asc_diagonal_win, self._check_desc_diagonal_win,
+        )
+        return any(func(player, draw) for func in check_func)
 
     def restart(self) -> None:
         """Launch a new game."""
