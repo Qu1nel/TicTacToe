@@ -118,7 +118,7 @@ git clone https://github.com/Qu1nel/TicTacToe.git
 cd TicTacToe/
 ```
 
-If you have the `make` programme installed, you can immediately create, activate the virtual environment and run the game with the command:
+If you have the `make` installed, you can immediately create, activate the virtual environment and run the game with the command:
 
 ```bash
 make init
