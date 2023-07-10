@@ -1,7 +1,7 @@
 [project]
 name = "TicTacToe"
 description = "The first OOP project for fun."
-version = "2023.7.9"
+version = "1.1"
 readme = "README.md"
 requires-python = ">=3.11"
 
@@ -21,7 +21,11 @@ line-length = 120
 target-version = "py311"
 select = ["ALL"]
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
+exclude = [
+  ".bzr", ".direnv", ".eggs", ".git", ".git-rewrite", ".hg", ".mypy_cache", ".nox", ".pants.d", ".pytype", ".ruff_cache",
+  ".svn", ".tox", ".venv", ".env", "__pypackages__", "__pycache__", "_build", "buck-out", "build", "dist", "node_modules",
+  "venv", "env",
+  ]
 ignore = [
   # D (pydocstyle)
   "D100", # Docstring in public module
@@ -68,33 +72,6 @@ ignore = [
 
   # For this project
   "PLW0603", # Using global statemtn to update
-]
-
-exclude = [
-  ".bzr",
-  ".direnv",
-  ".eggs",
-  ".git",
-  ".git-rewrite",
-  ".hg",
-  ".mypy_cache",
-  ".nox",
-  ".pants.d",
-  ".pytype",
-  ".ruff_cache",
-  ".svn",
-  ".tox",
-  ".venv",
-  ".env",
-  "__pypackages__",
-  "__pycache__",
-  "_build",
-  "buck-out",
-  "build",
-  "dist",
-  "node_modules",
-  "venv",
-  "env",
 ]
 
 
