@@ -23,8 +23,6 @@
   <a href="https://github.com/Qu1nel/TicTacToe/issues/">
     <img src="https://img.shields.io/github/issues/Qu1nel/TicTacToe" alt="open issues" />
   </a>
-
-
 </p>
 
 <p>
@@ -36,6 +34,9 @@
   <a>
   <a href="https://github.com/Qu1nel/TicTacToe/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Qu1nel/TicTacToe?color=g" alt="license" />
+  </a>
+  <a href="">
+    <img src="https://img.shields.io/github/actions/workflow/status/Qu1nel/TicTacToe/python_linting.yml" alt="linting" />
   </a>
 </p>
   
