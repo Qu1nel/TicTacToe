@@ -118,10 +118,13 @@ git clone https://github.com/Qu1nel/TicTacToe.git
 cd TicTacToe/
 ```
 
-If you have the `make` installed, you can immediately create and activate a virtual environment with requirements:
+If you have the `make` programme installed, you can immediately create, activate the virtual environment and run the game with the command:
 
 ```bash
-make start
+make init
+source .venv/bin/activate
+make install-requirements
+make run
 ```
 
 Or you can simply run `run.py` using the python interpreter
