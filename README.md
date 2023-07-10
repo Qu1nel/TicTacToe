@@ -61,9 +61,9 @@
   * [Screenshots](#screenshots)
 - [Installation](#installation)
   * [Requirements](#requirements)
-  * [Getting started](#getting-started)
-    + [Windows](#windows)
-    + [Linux](#linux)
+- [Getting started](#getting-started)
+  * [Windows](#windows)
+  * [Linux](#linux)
 - [Documentation](#documentation)
 - [Developers](#developers)
 - [License](#license)
@@ -109,7 +109,7 @@ Install requirements with make:
 make install-requirements
 ```
 
-### Getting started
+## Getting started
 
 Clone this repository and navigate to it with the command:
 
