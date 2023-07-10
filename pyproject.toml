@@ -87,6 +87,7 @@ exclude = [
   ".venv",
   ".env",
   "__pypackages__",
+  "__pycache__",
   "_build",
   "buck-out",
   "build",
@@ -138,4 +139,3 @@ venv = ".venv"
 line-length = 120
 target-version = ["py311"]
 include = '\.pyi?$'
-
