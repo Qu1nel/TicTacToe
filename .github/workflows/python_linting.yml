@@ -18,29 +18,22 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Install requirements
-        run: pip install -r requirements.txt
-
-      - name: Install ruff
-        run: pip install ruff
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install ruff
+          pip install mypy
+          pip install pyright
+          pip install black
 
       - name: Run ruff
         run: ruff check . --fix
 
-      - name: Install mypy
-        run: pip install mypy
-
       - name: Run mypy
         run: mypy .
 
-      - name: Install pyright
-        run: pip install pyright
-
       - name: Run pyright
         run: pyright .
-
-      - name: Install black
-        run: pip install black
 
       - name: Run black
         run: black .
