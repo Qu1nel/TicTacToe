@@ -1,18 +1,15 @@
-- [Security Policy](#security-policy)
-  - [Supported Versions](#supported-versions)
-  - [Reporting a Vulnerability](#reporting-a-vulnerability)
-
 # Security Policy
 
-## Supported Versions
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.1     | :white_check_mark: |
+I attach importance to software security, but I am human and cannot be infallible.
+Therefore, I am counting on you open source developers to keep me informed about real and possible security vulnerabilities.
+Please follow the instructions below to contact me even if you are not sure if your question is about data security.
 
 ## Reporting a Vulnerability
 
-Please report (suspected) security vulnerabilities to
-**[covach.qn@gmail.com](mailto:covach.qn@gmail.com)**. You will receive a response from
-me within 7 days. If the issue is confirmed, I will release a patch as soon as possible,
-depending on the complexity, but historically within a few days.
+**Please do not open GitHub issues for security vulnerabilities, as GitHub issues are publicly accessible!!!**
+
+Instead, contact us per mail: [covach.qn@gmail.com](mailto:covach.qn@gmail.com). We guarantee a response within two workdays and a security patch as fast as possible.
+
+Thanks for your cooperation and your understanding.
+
+[Qu1nel](https://github.com/Qu1nel/) © Ivan Kovach
