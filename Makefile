@@ -32,7 +32,7 @@ init: create-venv  ## Initialises the project (creates a virtual environment) an
 
 .PHONY: install-requirements
 install-requirements:  ## Install all requirements from 'requirements.txt'
-	@echo -e 
+	@echo -e
 	@echo -e "$(GREEN)Applying requirements.txt..."
 	@echo -e "============================$(RESET)"
 	@echo -e
@@ -139,4 +139,3 @@ print-%:
 
 
 .SILENT:
-
