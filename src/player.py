@@ -1,34 +1,25 @@
 import math
 import random
 import time
+from dataclasses import dataclass
 from typing import Final
 
 import numpy as np
 
 from src.config import FIGURE_COMPUTER, FIGURE_PLAYER
 from src.game import Game
+from src.misc import PlayerID
 
 COUNT_PLAYERS: Final[int] = 2
-HUMAN: Final[int] = 1
-COMPUTER: Final[int] = 2
 MAX_SUM: Final[int] = 9
 
 
+@dataclass(slots=True, frozen=True)
 class Player:
     """Player class."""
 
-    def __init__(self, badge: tuple[str, int]) -> None:
-        """Each player has a badge who he is (cross / circle)."""
-        if len(badge) != COUNT_PLAYERS:
-            msg = "badge must include two values! {name figure (cross or circle), number (1 or 2)"
-            raise TypeError(msg)
-        if not isinstance(badge[1], float | int):
-            msg = "The second value must be a digit"
-            raise TypeError(msg)
-        if not isinstance(badge[0], str):
-            msg = "The first value must be a string"
-            raise TypeError(msg)
-        self.figure, self.number = badge
+    figure: str
+    number: int
 
 
 class HumanPlayer(Player):
@@ -36,7 +27,9 @@ class HumanPlayer(Player):
 
     def __init__(self) -> None:
         """Init HumanPlayer instance."""
-        super().__init__(FIGURE_PLAYER)
+        figure = FIGURE_PLAYER[0]
+        player_id = FIGURE_PLAYER[1]
+        super().__init__(figure=figure, number=player_id)
 
     def make_move(self, game: Game, row: int, col: int) -> None:
         """Make move for Human."""
@@ -49,12 +42,14 @@ class ComputerPlayer(Player):
 
     def __init__(self) -> None:
         """Init ComputerPlayer instance."""
-        super().__init__(FIGURE_COMPUTER)
+        figure = FIGURE_COMPUTER[0]
+        player_id = FIGURE_COMPUTER[1]
+        super().__init__(figure=figure, number=player_id)
 
     def minimax(self, game: Game, player: int) -> dict:
         """Algorithm for tic-tac-toe, based on minimax."""
         best_player = self.number
-        other_player = HUMAN if player == COMPUTER else COMPUTER
+        other_player = PlayerID.HUMAN if player == PlayerID.COMPUTER else PlayerID.COMPUTER
 
         if game.current_winner == other_player:  # first we want to check if the previous move is a winner
             count_zeros = np.sum(game.board.get_board == 0) + 1
