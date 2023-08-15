@@ -33,3 +33,23 @@ class Singleton(type):
         if cls not in cls._instances:
             cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
+
+
+def not_valid_color_channels(*args: int) -> int:
+    """Check the color channels passed to it for validity.
+
+    Iterates through all transmitted channels and looks for channels whose value is outside the range [0;255]
+
+
+    Args:
+        *args: Set a colors channel
+
+    Returns:
+        0 if all colors is valid, else return invalide channel.
+
+    """
+    for channel in args:
+        if not (0 <= channel < 2**8):
+            return channel
+
+    return 0
