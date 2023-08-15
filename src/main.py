@@ -1,15 +1,12 @@
 import sys
-from typing import Final
 
-import pygame
+import pygame as pg
 
 from src.board import GameBoard
 from src.config import GO_FIRST
 from src.interface import Interface
+from src.misc import Figure
 from src.player import ComputerPlayer, HumanPlayer
-
-CROSS: Final[int] = 2
-CIRCLE: Final[int] = 1
 
 
 class TicTacToe(Interface):
@@ -27,9 +24,9 @@ class TicTacToe(Interface):
         """Draws shapes (cross, circle) relative to the state of the board."""
         for row in range(self.board.rows):
             for col in range(self.board.cols):
-                if self.board[row][col] == CIRCLE:
+                if self.board[row][col] == Figure.CIRCLE:
                     self._draw_circle(row, col)
-                elif self.board[row][col] == CROSS:
+                elif self.board[row][col] == Figure.CROSS:
                     self._draw_cross(row, col)
 
     def _check_vertival_win(self, player: int, draw: bool) -> bool:
@@ -104,17 +101,17 @@ class TicTacToe(Interface):
 
     def handle_events(self) -> None:
         """Handle actions entered by the player."""
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
                 sys.exit()
 
-            if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
+            if event.type == pg.MOUSEBUTTONDOWN and not self.game_over:
                 clock_row, clock_col = int(event.pos[1] // self.sq_size), int(event.pos[0] // self.sq_size)
                 if self.board.available_square(clock_row, clock_col):
                     self.human_player.make_move(self, clock_row, clock_col)
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+            if event.type == pg.KEYDOWN and event.key == pg.K_r:
                 self.restart()
 
     def make_moves(self) -> None:
@@ -127,13 +124,8 @@ class TicTacToe(Interface):
     def run(self) -> None:
         """Launch the game."""
         self.draw_back_ground()
+
         while True:
             self.make_moves()
-
-            pygame.display.update()
+            pg.display.update()
             self.clock.tick(self.framerate)
-
-
-def main() -> None:
-    """Enter point in game."""
-    TicTacToe().run()
