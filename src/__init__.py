@@ -6,6 +6,9 @@ import pygame as pg
 
 from src.main import App
 
+__author__ = "Qu1nel"
+__version__ = "1.1"
+
 
 def resource_path(relative_path: Path) -> Path:
     """Function for working paths inside an exe for python."""
@@ -27,8 +30,4 @@ except FileNotFoundError:
 
 pg.display.set_caption("TicTacToe")
 
-
-def main() -> None:
-    """Entry point to the game."""
-    game = App()
-    game.run()
+GameAppTicTacToe = App()
