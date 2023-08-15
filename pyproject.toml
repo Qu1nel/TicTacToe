@@ -29,6 +29,7 @@ exclude = [
 ignore = [
   # D (pydocstyle)
   "D100", # Docstring in public module
+  "D107", # Docstring in __init__ method
   "D203", # Docstring one blank line before class
   "D213", # Docstring multi-line-summary-second-line
   # UP (pyupgrade)
