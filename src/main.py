@@ -5,13 +5,13 @@ import pygame as pg
 from src.board import GameBoard
 from src.config import FIRST_MOVE
 from src.game_state import GameState
-from src.interface import Interface
+from src.interface import Interface, InterfaceRaw
 from src.misc import Figure, PlayerID
 from src.player import ComputerPlayer, HumanPlayer
 from src.window import Window
 
 
-class App(Interface):
+class App(InterfaceRaw):
     """The main class game Tic Tac Toe."""
 
     def __init__(self) -> None:
@@ -21,6 +21,7 @@ class App(Interface):
         self.Window = Window()
         self.GameStates = GameState()
         self.Board = GameBoard()
+        self.Interface = Interface()
 
         self.next_move = FIRST_MOVE
         self.human_player = HumanPlayer()

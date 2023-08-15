@@ -7,9 +7,10 @@ import src.config as c
 from src import colors
 from src.config import SPACE
 from src.game import Game
+from src.misc import Singleton
 
 
-class Interface(Game):
+class InterfaceRaw(Game):
     """Interface class."""
 
     sq_size: int
@@ -135,3 +136,7 @@ class Interface(Game):
     @abstractmethod
     def draw_figures(self) -> None:
         """Draws the main figures (circle and cross)."""
+
+
+class Interface(metaclass=Singleton):  # ruff: noqa: D101
+    pass
