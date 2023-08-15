@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any, Final
 
+from src.misc import Figure
+
 APP_PATH = Path(__file__).resolve().parent
 
 DEFAULT_SETT = {
@@ -15,24 +17,18 @@ SC_HEIGHT: int = 0
 
 CAPTION = "TicTacToe"
 GO_FIRST: str = ""  # COMPUTER or PLAYER
-
-FIGURE_PLAYER: tuple[str, int] = ("cross", 2)
-FIGURE_COMPUTER: tuple[str, int] = ("circle", 1)
-
 LENTH_BOARD: Final[int] = 3
+
+PLAYER_FIGURE = Figure.CIRCLE
 
 
 def init_vars(source: dict) -> None:
     """Init vars for game."""
-    global SC_WIDTH, SC_HEIGHT, GO_FIRST, FIGURE_PLAYER, FIGURE_COMPUTER
+    global SC_WIDTH, SC_HEIGHT, GO_FIRST
 
     SC_WIDTH = source["width_window"]
     SC_HEIGHT = source["width_window"]
     GO_FIRST = source["first_move"].upper()
-
-    fig = source["figure_player"]
-    FIGURE_PLAYER = (fig, 2 if fig == "cross" else 1)
-    FIGURE_COMPUTER = ("cross" if fig == "circle" else "circle", FIGURE_PLAYER[1] % 2 + 1)
 
 
 with open(f"{APP_PATH}/settings.txt") as f, open(f"{APP_PATH}/main_settings.json", "w") as data_file:

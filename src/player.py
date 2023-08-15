@@ -6,11 +6,10 @@ from typing import Final
 
 import numpy as np
 
-from src.config import FIGURE_COMPUTER, FIGURE_PLAYER
+from src import config
 from src.game import Game
-from src.misc import PlayerID
+from src.misc import Figure, PlayerID
 
-COUNT_PLAYERS: Final[int] = 2
 MAX_SUM: Final[int] = 9
 
 
@@ -18,18 +17,15 @@ MAX_SUM: Final[int] = 9
 class Player:
     """Player class."""
 
-    figure: str
-    number: int
+    figure: Figure
+    number: PlayerID
 
 
 class HumanPlayer(Player):
     """Human player."""
 
     def __init__(self) -> None:
-        """Init HumanPlayer instance."""
-        figure = FIGURE_PLAYER[0]
-        player_id = FIGURE_PLAYER[1]
-        super().__init__(figure=figure, number=player_id)
+        super().__init__(figure=config.PLAYER_FIGURE, number=PlayerID.HUMAN)
 
     def make_move(self, game: Game, row: int, col: int) -> None:
         """Make move for Human."""
@@ -41,10 +37,8 @@ class ComputerPlayer(Player):
     """Coumputer pseudo-AI player."""
 
     def __init__(self) -> None:
-        """Init ComputerPlayer instance."""
-        figure = FIGURE_COMPUTER[0]
-        player_id = FIGURE_COMPUTER[1]
-        super().__init__(figure=figure, number=player_id)
+        computer_figure = Figure.CIRCLE if config.PLAYER_FIGURE == Figure.CROSS else Figure.CROSS
+        super().__init__(figure=computer_figure, number=PlayerID.COMPUTER)
 
     def minimax(self, game: Game, player: int) -> dict:
         """Algorithm for tic-tac-toe, based on minimax."""
