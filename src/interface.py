@@ -29,7 +29,7 @@ class Interface(Game):
         except AssertionError:
             sys.exit(1)
 
-        super().__init__(c.CAPTION, c.SC_WIDTH, c.SC_HEIGHT, c.FRAME_RATE)
+        super().__init__(c.SC_WIDTH, c.SC_HEIGHT, c.FRAME_RATE)
         self.sq_size = c.SQUARE_SIZE
         self.ln_width = c.LINE_WIDTH
         self.win_ln_width = c.WIN_LINE_WIDTH

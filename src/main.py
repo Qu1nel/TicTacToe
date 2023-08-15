@@ -3,19 +3,26 @@ import sys
 import pygame as pg
 
 from src.board import GameBoard
-from src.config import GO_FIRST
+from src.config import FIRST_MOVE
+from src.game_state import GameState
 from src.interface import Interface
-from src.misc import Figure
+from src.misc import Figure, PlayerID
 from src.player import ComputerPlayer, HumanPlayer
+from src.window import Window
 
 
-class TicTacToe(Interface):
+class App(Interface):
     """The main class game Tic Tac Toe."""
 
     def __init__(self) -> None:
         """Init TicTacToe instance."""
         super().__init__()
-        self.go_first = GO_FIRST
+
+        self.Window = Window()
+        self.GameStates = GameState()
+        self.Board = GameBoard()
+
+        self.next_move = FIRST_MOVE
         self.human_player = HumanPlayer()
         self.computer_player = ComputerPlayer()
         self.board = GameBoard()
@@ -88,7 +95,7 @@ class TicTacToe(Interface):
         self.board = GameBoard()
         self.game_over = False
         self.current_winner = -1
-        self.go_first = GO_FIRST
+        self.next_move = FIRST_MOVE
 
     def update(self, row: int, col: int, number_player: int) -> None:
         """Update the table, renders it and checks if there is a victory."""
@@ -116,10 +123,12 @@ class TicTacToe(Interface):
 
     def make_moves(self) -> None:
         """Chooses who makes the move."""
-        if self.go_first == "COMPUTER" and not self.game_over:
-            self.computer_player.make_move(self)
-        elif self.go_first == "PLAYER":
-            self.handle_events()
+        who_made_move = self.next_move
+        match who_made_move:
+            case PlayerID.COMPUTER if not self.game_over:
+                self.computer_player.make_move(self)
+            case PlayerID.HUMAN:
+                self.handle_events()
 
     def run(self) -> None:
         """Launch the game."""

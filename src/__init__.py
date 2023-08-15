@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pygame as pg
 
-from src.main import TicTacToe
+from src.main import App
 
 
 def resource_path(relative_path: Path) -> Path:
@@ -30,5 +30,5 @@ pg.display.set_caption("TicTacToe")
 
 def main() -> None:
     """Entry point to the game."""
-    game = TicTacToe()
+    game = App()
     game.run()

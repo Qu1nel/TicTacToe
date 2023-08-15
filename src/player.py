@@ -30,7 +30,7 @@ class HumanPlayer(Player):
     def make_move(self, game: Game, row: int, col: int) -> None:
         """Make move for Human."""
         game.update(row, col, self.number)
-        game.go_first = "COMPUTER"
+        game.next_move = PlayerID.COMPUTER
 
 
 class ComputerPlayer(Player):
@@ -95,4 +95,4 @@ class ComputerPlayer(Player):
                 clock_row, clock_col = coordinates // 3, coordinates % 3
                 game.update(clock_row, clock_col, self.number)
 
-            game.go_first = "PLAYER"
+            game.next_move = PlayerID.HUMAN

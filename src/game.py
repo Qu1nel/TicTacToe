@@ -3,22 +3,20 @@ from abc import abstractmethod
 import pygame
 
 from src.board import GameBoard
+from src.config import PlayerID
 
 
 class Game:
     """A class with all the main attributes of the game (game window)."""
 
-    caption: str
     width: int
     height: int
     framerate: int
     board: GameBoard
-    go_first: str
+    next_move: PlayerID
 
-    def __init__(self, caption: str, width: int, height: int, framerate: int = 60) -> None:
+    def __init__(self, width: int, height: int, framerate: int = 60) -> None:
         """Init Game instance."""
-        pygame.init()
-        pygame.display.set_caption(caption)
         self.screen = pygame.display.set_mode((width, height))
         self.clock = pygame.time.Clock()
         self.framerate = framerate
