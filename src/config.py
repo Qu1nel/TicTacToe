@@ -19,12 +19,12 @@ LENTH_BOARD: Final[int] = 3
 FIRST_MOVE = PlayerID.COMPUTER  # COMPUTER or PLAYER
 PLAYER_FIGURE = Figure.CIRCLE  # CIRCLE or CROSS
 
-WINDOW_WIDTH: Final[int] = 720
-WINDOW_HEIGHT: Final[int] = 720
+WINDOW_SIZE: Final[int] = 720
 
 FRAME_PER_SECOND: Final[int] = 144
 
-LINE_WIDTH: Final[int] = 10  # px
+LINE_WIDTH: Final[int] = 8  # px
+CELL_SIZE: Final[int] = WINDOW_SIZE // 3
 
 
 def init_vars(source: dict) -> None:

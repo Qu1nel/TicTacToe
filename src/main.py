@@ -19,7 +19,7 @@ class App(InterfaceRaw, metaclass=Singleton):
         """Init TicTacToe instance."""
         super().__init__()
 
-        self.Window = Window(width=config.WINDOW_WIDTH, height=config.WINDOW_HEIGHT, fps=config.FRAME_PER_SECOND)
+        self.Window = Window(width=config.WINDOW_SIZE, height=config.WINDOW_SIZE, fps=config.FRAME_PER_SECOND)
         self.GameStates = GameState()
         self.Board = GameBoard()
         self.Interface = Interface()
@@ -93,7 +93,7 @@ class App(InterfaceRaw, metaclass=Singleton):
 
     def restart(self) -> None:
         """Launch a new game."""
-        self.draw_back_ground()
+        self.Interface.draw_bg(window=self.Window)
         self.board = GameBoard()
         self.game_over = False
         self.current_winner = -1
@@ -134,9 +134,9 @@ class App(InterfaceRaw, metaclass=Singleton):
 
     def run(self) -> None:
         """Launch the game."""
-        self.draw_back_ground()
+        self.Interface.draw_bg(window=self.Window)
 
         while True:
             self.make_moves()
-            pg.display.update()
-            self.clock.tick(self.framerate)
+            self.Interface.update_display()
+            self.Window.set_fps()

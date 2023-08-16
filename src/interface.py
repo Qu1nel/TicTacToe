@@ -1,13 +1,17 @@
 import sys
 from abc import abstractmethod
+from functools import partial
+from typing import NamedTuple
 
 import pygame as pg
 
 import src.config as c
 from src import colors
+from src.colors import RGBA, Color, get_rgb_color
 from src.config import SPACE
 from src.game import Game
 from src.misc import Singleton
+from src.window import Window
 
 
 class InterfaceRaw(Game):
@@ -32,52 +36,12 @@ class InterfaceRaw(Game):
 
         super().__init__(c.SC_WIDTH, c.SC_HEIGHT, c.FRAME_RATE)
         self.sq_size = c.SQUARE_SIZE
-        self.ln_width = c.LINE_WIDTH
         self.win_ln_width = c.WIN_LINE_WIDTH
         self.crcl_color = colors.CIRCLE_COLOR
         self.crss_color = colors.CROSS_COLOR
         self.crss_width = c.CROSS_WIDTH
         self.crcl_width = c.CIRCLE_WIDTH
         self.crcl_rad = c.CIRCLE_RADIUS
-
-    def draw_back_ground(self) -> None:
-        """Draws the background."""
-        self.screen.fill(colors.BG_COLOR)
-        self._draw_lines()
-        pg.display.update()
-
-    def _draw_lines(self) -> None:
-        """Draws the lines for BG."""
-        # horizontals
-        pg.draw.line(
-            surface=self.screen,
-            color=colors.BG_LINE_COLOR,
-            start_pos=(0, self.sq_size),
-            end_pos=(self.width, self.sq_size),
-            width=self.win_ln_width,
-        )
-        pg.draw.line(
-            surface=self.screen,
-            color=colors.BG_LINE_COLOR,
-            start_pos=(0, self.sq_size * 2),
-            end_pos=(self.width, self.sq_size * 2),
-            width=self.win_ln_width,
-        )
-        # vertical
-        pg.draw.line(
-            surface=self.screen,
-            color=colors.BG_LINE_COLOR,
-            start_pos=(self.sq_size, 0),
-            end_pos=(self.sq_size, self.height),
-            width=self.win_ln_width,
-        )
-        pg.draw.line(
-            surface=self.screen,
-            color=colors.BG_LINE_COLOR,
-            start_pos=(self.sq_size * 2, 0),
-            end_pos=(self.sq_size * 2, self.height),
-            width=self.win_ln_width,
-        )
 
     def _draw_circle(self, row: int, col: int) -> None:
         """Draws a circle no the game board."""
@@ -138,5 +102,91 @@ class InterfaceRaw(Game):
         """Draws the main figures (circle and cross)."""
 
 
-class Interface(metaclass=Singleton):  # ruff: noqa: D101
-    pass
+class InterfaceColors(NamedTuple):
+    """NamedTuple for Colors interface."""
+
+    BackGround: Color | RGBA
+    BackGroundLine: Color | RGBA
+
+
+class Interface(metaclass=Singleton):
+    """Flex interface class.
+
+    Attributes:
+        colors: Set a using colors.
+        bg_line_width: A width line on window.
+        cell_size: A width and height of cell on window.
+
+    """
+
+    colors: InterfaceColors
+    bg_line_width: int
+    cell_size: int
+
+    def __init__(self) -> None:
+        self.colors = InterfaceColors(
+            BackGround=Color.BG,
+            BackGroundLine=Color.BG_LINE,
+        )
+
+        self.bg_line_width = c.LINE_WIDTH
+        self.cell_size = c.CELL_SIZE
+
+    @staticmethod
+    def update_display() -> None:
+        """Method alias for pygame.display.update()."""
+        pg.display.update()
+
+    def draw_bg(self, window: Window) -> None:
+        """Draw BG on window.
+
+        Args:
+            window: A window instance
+
+
+        Raises:
+            TypeError: If self.colors.BackGround is not Color or RGBA class.
+
+        """
+        rgb = get_rgb_color(self.colors.BackGround)
+        window.screen.fill(rgb)
+        self._draw_bg_lines(window)
+        self.update_display()
+
+    def _draw_bg_lines(self, window: Window) -> None:
+        rgb = get_rgb_color(self.colors.BackGroundLine)
+
+        draw_bg_line = partial(
+            pg.draw.line,
+            surface=window.screen,
+            color=rgb,
+            width=self.bg_line_width,
+        )
+
+        horizontals_coords = (
+            {
+                "start": (0, self.cell_size),
+                "end": (window.width, self.cell_size),
+            },
+            {
+                "start": (0, 2 * self.cell_size),
+                "end": (window.width, 2 * self.cell_size),
+            },
+        )
+
+        vertical_coords = (
+            {
+                "start": (self.cell_size, 0),
+                "end": (self.cell_size, window.height),
+            },
+            {
+                "start": (2 * self.cell_size, 0),
+                "end": (2 * self.cell_size, window.height),
+            },
+        )
+
+        for coords in horizontals_coords + vertical_coords:
+            draw_bg_line(
+                start_pos=coords["start"],
+                end_pos=coords["end"],
+            )

@@ -29,3 +29,7 @@ class Window(metaclass=Singleton):
 
         self.clock = pg.time.Clock()
         self.fps = fps
+
+    def set_fps(self) -> None:
+        """Method alias for clock.tick()."""
+        self.clock.tick(self.fps)

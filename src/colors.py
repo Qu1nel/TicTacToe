@@ -84,6 +84,9 @@ class Color(Enum):
     WHITE = RGBA(r=255, g=255, b=255)
     BLACK = RGBA(r=0, g=0, b=0)
 
+    BG = RGBA(r=34, g=34, b=34)
+    BG_LINE = RGBA(r=255, g=255, b=0)
+
     def __str__(self) -> str:  # ruff: noqa: D105
         return self.name.lower()
 
@@ -110,3 +113,28 @@ class Color(Enum):
 
         """
         return self.value.to_rgb(alpha)
+
+
+def get_rgb_color(color: RGBA | Color) -> tuple[int, ...]:
+    """Checks the color for rgb and to_rgb methods, returns the rgb color.
+
+    Args:
+        color: RGBA or Color instance.
+
+
+    Returns:
+        Correct tuple[r, g, b] view color.
+
+    Raises:
+        TypeError: If color is not Color or RGBA class.
+
+    """
+    if isinstance(color, Color):
+        rgb = color.rgb()
+    elif isinstance(color, RGBA):
+        rgb = color.to_rgb()
+    else:
+        msg = f"object BackGround must be {RGBA} or {Color} class. but not {type(color)}."
+        raise TypeError(msg)
+
+    return rgb
