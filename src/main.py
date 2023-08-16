@@ -1,4 +1,5 @@
 import sys
+from typing import Never
 
 import pygame as pg
 
@@ -132,7 +133,7 @@ class App(InterfaceRaw, metaclass=Singleton):
             case PlayerID.HUMAN:
                 self.handle_events()
 
-    def run(self) -> None:
+    def run(self) -> Never:
         """Launch the game."""
         self.Interface.draw_bg(window=self.Window)
 

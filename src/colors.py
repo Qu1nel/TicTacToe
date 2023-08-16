@@ -87,10 +87,10 @@ class Color(Enum):
     BG = RGBA(r=34, g=34, b=34)
     BG_LINE = RGBA(r=255, g=255, b=0)
 
-    def __str__(self) -> str:  # ruff: noqa: D105
+    def __str__(self) -> str:  # noqa: D105
         return self.name.lower()
 
-    def hex(self, alpha: bool = False) -> str:  # ruff: noqa: A003
+    def hex(self, alpha: bool = False) -> str:  # noqa: A003
         """String representation of color in hex format.
 
         Args:

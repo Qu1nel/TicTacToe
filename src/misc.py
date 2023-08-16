@@ -45,7 +45,7 @@ def not_valid_color_channels(*args: int) -> int:
         *args: Set a colors channel
 
     Returns:
-        0 if all colors is valid, else return invalide channel.
+        0 if all colors is valid, else return invalid channel.
 
     """
     for channel in args:
