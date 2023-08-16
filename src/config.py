@@ -19,6 +19,13 @@ LENTH_BOARD: Final[int] = 3
 FIRST_MOVE = PlayerID.COMPUTER  # COMPUTER or PLAYER
 PLAYER_FIGURE = Figure.CIRCLE  # CIRCLE or CROSS
 
+WINDOW_WIDTH: Final[int] = 720
+WINDOW_HEIGHT: Final[int] = 720
+
+FRAME_PER_SECOND: Final[int] = 144
+
+LINE_WIDTH: Final[int] = 10  # px
+
 
 def init_vars(source: dict) -> None:
     """Init vars for game."""
@@ -53,7 +60,6 @@ BOARD_ROWS = 3
 CIRCLE_RADIUS = int(SC_WIDTH * 0.1)  # 600px -- 10% = 60px
 CROSS_WIDTH = int(SC_WIDTH * 0.0417)  # 600px -- 4.17% = 25px default
 CIRCLE_WIDTH = int(SC_WIDTH * 0.025)  # 600px -- 2.5% = 15px default
-LINE_WIDTH = CROSS_WIDTH
 WIN_LINE_WIDTH = CIRCLE_WIDTH
 
 SPACE = int(SC_WIDTH * 0.0917)  # 600px -- 9.17% = 55px default

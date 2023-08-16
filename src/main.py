@@ -2,23 +2,24 @@ import sys
 
 import pygame as pg
 
+from src import config
 from src.board import GameBoard
 from src.config import FIRST_MOVE
 from src.game_state import GameState
 from src.interface import Interface, InterfaceRaw
-from src.misc import Figure, PlayerID
+from src.misc import Figure, PlayerID, Singleton
 from src.player import ComputerPlayer, HumanPlayer
 from src.window import Window
 
 
-class App(InterfaceRaw):
+class App(InterfaceRaw, metaclass=Singleton):
     """The main class game Tic Tac Toe."""
 
     def __init__(self) -> None:
         """Init TicTacToe instance."""
         super().__init__()
 
-        self.Window = Window()
+        self.Window = Window(width=config.WINDOW_WIDTH, height=config.WINDOW_HEIGHT, fps=config.FRAME_PER_SECOND)
         self.GameStates = GameState()
         self.Board = GameBoard()
         self.Interface = Interface()
