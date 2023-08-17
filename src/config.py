@@ -16,15 +16,21 @@ SC_WIDTH: int = 0
 SC_HEIGHT: int = 0
 LENTH_BOARD: Final[int] = 3
 
-FIRST_MOVE = PlayerID.COMPUTER  # COMPUTER or PLAYER
-PLAYER_FIGURE = Figure.CIRCLE  # CIRCLE or CROSS
+FIRST_MOVE: Final = PlayerID.COMPUTER  # COMPUTER or PLAYER
+PLAYER_FIGURE: Final = Figure.CIRCLE  # CIRCLE or CROSS
 
-WINDOW_SIZE: Final[int] = 720
+WINDOW_SIZE: Final = 720  # px
 
-FRAME_PER_SECOND: Final[int] = 144
+FRAME_PER_SECOND: Final = 144
 
-LINE_WIDTH: Final[int] = 8  # px
-CELL_SIZE: Final[int] = WINDOW_SIZE // 3
+LINE_WIDTH: Final = 8  # px
+WINNER_LINE_WIDTH: Final = 6  # px
+CELL_SIZE: Final = WINDOW_SIZE // 3
+
+CIRCLE_RADIUS: Final = 80  # px
+
+CIRCLE_WIDTH: Final = 15  # px
+CROSS_WIDTH: Final = 25  # px
 
 
 def init_vars(source: dict) -> None:
@@ -56,11 +62,6 @@ FRAME_RATE = 120
 
 BOARD_COLS = 3
 BOARD_ROWS = 3
-
-CIRCLE_RADIUS = int(SC_WIDTH * 0.1)  # 600px -- 10% = 60px
-CROSS_WIDTH = int(SC_WIDTH * 0.0417)  # 600px -- 4.17% = 25px default
-CIRCLE_WIDTH = int(SC_WIDTH * 0.025)  # 600px -- 2.5% = 15px default
-WIN_LINE_WIDTH = CIRCLE_WIDTH
 
 SPACE = int(SC_WIDTH * 0.0917)  # 600px -- 9.17% = 55px default
 SQUARE_SIZE = SC_WIDTH // 3  # only 3 cells on the field lol
