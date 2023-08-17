@@ -1,3 +1,4 @@
+from abc import ABCMeta
 from enum import IntEnum, unique
 from typing import Any, ClassVar
 
@@ -24,7 +25,7 @@ class PlayerID(IntEnum):
     COMPUTER = _ID.COMPUTER.value
 
 
-class Singleton(type):
+class SingletonABC(ABCMeta):
     """Class template singleton."""
 
     _instances: ClassVar[dict] = {}

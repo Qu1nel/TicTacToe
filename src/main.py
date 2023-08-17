@@ -4,6 +4,7 @@ from typing import Never
 import pygame as pg
 
 from src import config
+from src.app import AppBase
 from src.board import GameBoard
 from src.config import FIRST_MOVE
 from src.game_state import GameState
@@ -13,7 +14,7 @@ from src.player import ComputerPlayer, HumanPlayer
 from src.window import Window
 
 
-class App(InterfaceRaw, metaclass=Singleton):
+class App(AppBase):
     """The main class game Tic Tac Toe."""
 
     def __init__(self) -> None:

@@ -1,9 +1,9 @@
 import pygame as pg
 
-from src.misc import Singleton
+from src.misc import SingletonABC
 
 
-class Window(metaclass=Singleton):
+class Window(metaclass=SingletonABC):
     """Base window class.
 
     Attributes:
