@@ -1,13 +1,17 @@
 import math
 import random
+import sys
 import time
 from dataclasses import dataclass
 from typing import Final
 
 import numpy as np
+import pygame as pg
 
 from src import config
-from src.game import Game
+from src.app import AppBase
+from src.board import GameBoard
+from src.game_state import GameState
 from src.misc import Figure, PlayerID
 
 MAX_SUM: Final[int] = 9
@@ -27,29 +31,46 @@ class HumanPlayer(Player):
     def __init__(self) -> None:
         super().__init__(figure=config.PLAYER_FIGURE, number=PlayerID.HUMAN)
 
-    def make_move(self, game: Game, row: int, col: int) -> None:
+    def make_move(self, states: GameState, game: AppBase, row: int, col: int) -> None:
         """Make move for Human."""
         game.update(row, col, self.number)
-        game.next_move = PlayerID.COMPUTER
+        states.who_make_move = PlayerID.COMPUTER
+
+    def step(self, states: GameState, board: GameBoard, game: AppBase) -> None:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+
+            if event.type == pg.MOUSEBUTTONDOWN and not states.game_over:
+                clock_row = event.pos[1] // game.Interface.cell_size
+                clock_col = event.pos[0] // game.Interface.cell_size
+
+                if board.available_square(clock_row, clock_col):
+                    self.make_move(states=states, game=game, row=clock_row, col=clock_col)
+
+            if event.type == pg.KEYDOWN and event.key == pg.K_r:
+                game.restart()
 
 
 class ComputerPlayer(Player):
-    """Coumputer pseudo-AI player."""
+    """Computer pseudo-AI player."""
 
     def __init__(self) -> None:
-        computer_figure = Figure.CIRCLE if config.PLAYER_FIGURE == Figure.CROSS else Figure.CROSS
+        human_figure = config.PLAYER_FIGURE
+        computer_figure = Figure.CIRCLE if human_figure.value == Figure.CROSS.value else Figure.CROSS
         super().__init__(figure=computer_figure, number=PlayerID.COMPUTER)
 
-    def minimax(self, game: Game, player: int) -> dict:
+    def minimax(self, states: GameState, game: AppBase, board: GameBoard, player: PlayerID) -> dict:
         """Algorithm for tic-tac-toe, based on minimax."""
         best_player = self.number
         other_player = PlayerID.HUMAN if player == PlayerID.COMPUTER else PlayerID.COMPUTER
 
-        if game.current_winner == other_player:  # first we want to check if the previous move is a winner
-            count_zeros = np.sum(game.board.get_board == 0) + 1
+        if states.current_winner == other_player:  # first we want to check if the previous move is a winner
+            count_zeros = np.sum(board.get_board == 0) + 1
             return {"position": None, "score": 1 * count_zeros if other_player == best_player else -1 * count_zeros}
 
-        if 0 not in game.board.get_board:
+        if 0 not in board.get_board:
             return {"position": None, "score": 0}
 
         if player == best_player:
@@ -58,17 +79,17 @@ class ComputerPlayer(Player):
             # each score should minimize
             best_move = {"position": None, "score": math.inf}
 
-        straight_board = [digit for row in game.board.get_board for digit in row]
-        for possible_move in [indx for indx, digit in enumerate(straight_board) if digit == 0]:
-            game.board.mark_square(possible_move // 3, possible_move % 3, player)
+        straight_board = [digit for row in board.get_board for digit in row]
+        for possible_move in [idx for idx, digit in enumerate(straight_board) if digit == 0]:
+            board.mark_square(possible_move // 3, possible_move % 3, player)
             if game.check_win(player, draw=False):
-                game.current_winner = player
+                states.current_winner = player
 
-            sim_score = self.minimax(game, other_player)
+            sim_score = self.minimax(states=states, game=game, board=board, player=other_player)
 
             # undo move
-            game.board[possible_move // 3][possible_move % 3] = 0
-            game.current_winner = -1
+            board[possible_move // 3][possible_move % 3] = 0
+            states.current_winner = None
 
             # this represents the move optimal next move
             sim_score["position"] = possible_move
@@ -81,13 +102,14 @@ class ComputerPlayer(Player):
 
         return best_move
 
-    def make_move(self, game: Game) -> None:
+    def make_move(self, states: GameState, game: AppBase, board: GameBoard) -> None:
         """Make a move for the opponent (computer)."""
-        if not game.game_over:
+        if not states.game_over:
+            print("in make_move")
             time.sleep(0.2)
 
-            if np.sum(game.board.get_board == 0) != MAX_SUM:
-                coordinates = self.minimax(game, self.number)["position"]  # MINIMAX
+            if np.sum(board.get_board == 0) != MAX_SUM:
+                coordinates = self.minimax(states=states, game=game, board=board, player=self.number)["position"]
             else:
                 coordinates = random.randint(0, 8)
 
@@ -95,4 +117,8 @@ class ComputerPlayer(Player):
                 clock_row, clock_col = coordinates // 3, coordinates % 3
                 game.update(clock_row, clock_col, self.number)
 
-            game.next_move = PlayerID.HUMAN
+            states.who_make_move = PlayerID.HUMAN
+
+    def step(self, states: GameState, board: GameBoard, game: AppBase) -> None:
+        if not states.game_over:
+            self.make_move(states=states, game=game, board=board)
