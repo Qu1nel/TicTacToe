@@ -76,16 +76,17 @@ class RGBA:
 class Color(Enum):
     """Enums for colors."""
 
-    RED = RGBA(r=255, g=0, b=0)
-    GREEN = RGBA(r=0, g=255, b=0)
-    BLUE = RGBA(r=0, g=0, b=255)
+    RED = RGBA(255, 0, 0)
+    GREEN = RGBA(0, 255, 0)
+    BLUE = RGBA(0, 0, 255)
 
-    GRAY = RGBA(r=128, g=128, b=128)
-    WHITE = RGBA(r=255, g=255, b=255)
-    BLACK = RGBA(r=0, g=0, b=0)
+    GRAY = RGBA(128, 128, 128)
+    WHITE = RGBA(255, 255, 255)
+    BLACK = RGBA(0, 0, 0)
 
-    BG = RGBA(r=34, g=34, b=34)
-    BG_LINE = RGBA(r=255, g=255, b=0)
+    BG = RGBA(34, 34, 34)
+    BG_LINE = RGBA(255, 255, 0)
+    Figure = RGBA(240, 240, 240)
 
     def __str__(self) -> str:  # noqa: D105
         return self.name.lower()
