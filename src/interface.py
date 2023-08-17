@@ -107,9 +107,10 @@ class InterfaceColors(NamedTuple):
 
     BackGround: Color | RGBA
     BackGroundLine: Color | RGBA
+    Figure: Color | RGBA
 
 
-class Interface(metaclass=Singleton):
+class Interface(metaclass=SingletonABC):
     """Flex interface class.
 
     Attributes:
@@ -127,10 +128,17 @@ class Interface(metaclass=Singleton):
         self.colors = InterfaceColors(
             BackGround=Color.BG,
             BackGroundLine=Color.BG_LINE,
+            Figure=Color.Figure,
         )
 
         self.bg_line_width = c.LINE_WIDTH
+        self.winner_line_width = c.WINNER_LINE_WIDTH
         self.cell_size = c.CELL_SIZE
+
+        self.circle_radius = c.CIRCLE_RADIUS
+        self.circle_width = c.CIRCLE_WIDTH
+
+        self.cross_width = c.CROSS_WIDTH
 
     @staticmethod
     def update_display() -> None:
@@ -190,3 +198,65 @@ class Interface(metaclass=Singleton):
                 start_pos=coords["start"],
                 end_pos=coords["end"],
             )
+
+    def draw_figures(self, window: Window, board: GameBoard) -> None:
+        """Draws shapes (cross, circle) relative to the state of the board.
+
+        Args:
+            window: A windows instance.
+            board: A game board.
+
+        """
+        for row in range(board.rows):
+            for col in range(board.cols):
+                if board[row][col] == Figure.CIRCLE:
+                    self._draw_circle(window, row, col)
+                elif board[row][col] == Figure.CROSS:
+                    self._draw_cross(window, row, col)
+
+    def _draw_circle(self, window: Window, row: int, col: int) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        pg.draw.circle(
+            surface=window.screen,
+            color=rgb,
+            center=(col * self.cell_size + self.cell_size // 2, row * self.cell_size + self.cell_size // 2),
+            radius=self.circle_radius,
+            width=self.circle_width,
+        )
+
+    def _draw_cross(self, window: Window, row: int, col: int) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        draw_diagonal = partial(
+            pg.draw.line,
+            surface=window.screen,
+            color=rgb,
+            width=self.cross_width,
+        )
+
+        draw_diagonal(
+            start_pos=(col * self.cell_size + SPACE, row * self.cell_size + self.cell_size - SPACE),
+            end_pos=(col * self.cell_size + self.cell_size - SPACE, row * self.cell_size + SPACE),
+        )
+
+        draw_diagonal(
+            start_pos=(col * self.cell_size + SPACE, row * self.cell_size + SPACE),
+            end_pos=(col * self.cell_size + self.cell_size - SPACE, row * self.cell_size + self.cell_size - SPACE),
+        )
+
+    def draw_vertical_winning_line(self, window: Window, col: int) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        pos_x = col * self.cell_size + self.cell_size // 2
+        pg.draw.line(window.screen, rgb, (pos_x, 12), (pos_x, window.height - 12), self.winner_line_width)
+
+    def draw_horizontal_winning_line(self, window: Window, row: int) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        pos_y = row * self.cell_size + self.cell_size // 2
+        pg.draw.line(window.screen, rgb, (12, pos_y), (window.height - 12, pos_y), self.winner_line_width)
+
+    def draw_left_diagonal_line(self, window: Window) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        pg.draw.line(window.screen, rgb, (12, window.height - 12), (window.width - 12, 12), self.winner_line_width)
+
+    def draw_right_diagonal_line(self, window: Window) -> None:
+        rgb = get_rgb_color(self.colors.Figure)
+        pg.draw.line(window.screen, rgb, (12, 12), (window.width - 12, window.height - 12), self.winner_line_width)
