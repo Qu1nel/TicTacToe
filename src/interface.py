@@ -58,7 +58,7 @@ class Interface(metaclass=SingletonABC):
         """Draw BG on window.
 
         Args:
-            window: A window instance
+            window: A window instance.
 
 
         Raises:
@@ -153,19 +153,45 @@ class Interface(metaclass=SingletonABC):
         )
 
     def draw_vertical_winning_line(self, window: Window, col: int) -> None:
+        """Draw a vertical victory line on the column `col`.
+
+        Args:
+            window: The window where the line will be drawn.
+            col: The index of the column where the line will be drawn.
+
+        """
         rgb = get_rgb_color(self.colors.Figure)
         pos_x = col * self.cell_size + self.cell_size // 2
         pg.draw.line(window.screen, rgb, (pos_x, 12), (pos_x, window.height - 12), self.winner_line_width)
 
     def draw_horizontal_winning_line(self, window: Window, row: int) -> None:
+        """Draw a horizontal victory line on the column `row`.
+
+        Args:
+            window: The window where the line will be drawn.
+            row: The index of the row where the line will be drawn.
+
+        """
         rgb = get_rgb_color(self.colors.Figure)
         pos_y = row * self.cell_size + self.cell_size // 2
         pg.draw.line(window.screen, rgb, (12, pos_y), (window.height - 12, pos_y), self.winner_line_width)
 
     def draw_left_diagonal_line(self, window: Window) -> None:
+        """Draw a left diagonal victory line on the screen.
+
+        Args:
+            window: The window where the line will be drawn.
+
+        """
         rgb = get_rgb_color(self.colors.Figure)
         pg.draw.line(window.screen, rgb, (12, window.height - 12), (window.width - 12, 12), self.winner_line_width)
 
     def draw_right_diagonal_line(self, window: Window) -> None:
+        """Draw a right diagonal victory line on the screen.
+
+        Args:
+            window: The window where the line will be drawn.
+
+        """
         rgb = get_rgb_color(self.colors.Figure)
         pg.draw.line(window.screen, rgb, (12, 12), (window.width - 12, window.height - 12), self.winner_line_width)

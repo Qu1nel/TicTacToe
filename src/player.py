@@ -37,6 +37,14 @@ class HumanPlayer(Player):
         states.who_make_move = PlayerID.COMPUTER
 
     def step(self, states: GameState, board: GameBoard, game: AppBase) -> None:
+        """Handles events from the user, starts the move from the person.
+
+        Args:
+            states: Some game states.
+            board: Game board.
+            game: Game itself.
+
+        """
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -120,5 +128,13 @@ class ComputerPlayer(Player):
             states.who_make_move = PlayerID.HUMAN
 
     def step(self, states: GameState, board: GameBoard, game: AppBase) -> None:
+        """Start the move from the computer.
+
+        Args:
+            states: Some game states.
+            board: Game board.
+            game: Game itself.
+
+        """
         if not states.game_over:
             self.make_move(states=states, game=game, board=board)
