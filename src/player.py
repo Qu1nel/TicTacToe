@@ -113,7 +113,6 @@ class ComputerPlayer(Player):
     def make_move(self, states: GameState, game: AppBase, board: GameBoard) -> None:
         """Make a move for the opponent (computer)."""
         if not states.game_over:
-            print("in make_move")
             time.sleep(0.2)
 
             if np.sum(board.get_board == 0) != MAX_SUM:

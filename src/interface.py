@@ -6,7 +6,6 @@ import pygame as pg
 import src.config as c
 from src.board import GameBoard
 from src.colors import RGBA, Color, get_rgb_color
-from src.config import SPACE
 from src.misc import Figure, SingletonABC
 from src.window import Window
 
@@ -48,6 +47,8 @@ class Interface(metaclass=SingletonABC):
         self.circle_width = c.CIRCLE_WIDTH
 
         self.cross_width = c.CROSS_WIDTH
+
+        self.space_cross = c.SPACE_FOR_CROSS
 
     @staticmethod
     def update_display() -> None:
@@ -143,13 +144,19 @@ class Interface(metaclass=SingletonABC):
         )
 
         draw_diagonal(
-            start_pos=(col * self.cell_size + SPACE, row * self.cell_size + self.cell_size - SPACE),
-            end_pos=(col * self.cell_size + self.cell_size - SPACE, row * self.cell_size + SPACE),
+            start_pos=(
+                col * self.cell_size + self.space_cross,
+                row * self.cell_size + self.cell_size - self.space_cross,
+            ),
+            end_pos=(col * self.cell_size + self.cell_size - self.space_cross, row * self.cell_size + self.space_cross),
         )
 
         draw_diagonal(
-            start_pos=(col * self.cell_size + SPACE, row * self.cell_size + SPACE),
-            end_pos=(col * self.cell_size + self.cell_size - SPACE, row * self.cell_size + self.cell_size - SPACE),
+            start_pos=(col * self.cell_size + self.space_cross, row * self.cell_size + self.space_cross),
+            end_pos=(
+                col * self.cell_size + self.cell_size - self.space_cross,
+                row * self.cell_size + self.cell_size - self.space_cross,
+            ),
         )
 
     def draw_vertical_winning_line(self, window: Window, col: int) -> None:

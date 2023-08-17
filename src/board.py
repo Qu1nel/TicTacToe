@@ -1,8 +1,6 @@
 import numpy as np
 import numpy.typing as npt
 
-import src.config as con
-
 
 class GameBoard:
     """Representation of the playing field."""
@@ -12,10 +10,9 @@ class GameBoard:
     rows: int
 
     def __init__(self) -> None:
-        """Init GameBoard instance."""
-        self.__board = np.zeros((con.BOARD_ROWS, con.BOARD_COLS))
-        self.rows = con.BOARD_ROWS
-        self.cols = con.BOARD_COLS
+        self.__board = np.zeros((3, 3))
+        self.rows = 3
+        self.cols = 3
 
     def __getitem__(self, item: int) -> npt.NDArray[np.float64]:
         """Return self[item].
