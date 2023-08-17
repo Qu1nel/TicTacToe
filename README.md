@@ -143,15 +143,6 @@ python3 run.py
 
 ## Documentation
 
-There is a <u>*[settings.txt](./src/settings.txt)*</u> file in the file directory, in which you can change the game settings. such as:
-
-1. Screen width
-2. Who goes first (player or computer)
-3. What is the player's shape (circle or cross)
-
-To restart the game you need to press '**R**'
-
-For full help with make commands, you can use the command:
 
 ```bash
 make help

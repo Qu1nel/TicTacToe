@@ -1,9 +1,0 @@
-### Attention! Changing not what is asked for can lead to irreparable events. Follow the instructions for each setting!
-
-1. who will make the first move (computer or player) : computer
-2. what is the player's figure (cross or circle) : cross
-3. The width of the window in px : 600
-
-#####
-    !3(And, accordingly, the height, since the game window is square)
-    !3(preferably the value is a multiple of 3)
