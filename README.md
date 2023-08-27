@@ -54,16 +54,17 @@
 <br />
 
 <!-- Table of Contents -->
+
 # Contents
 
 - [About the Project](#about-tictactoe)
-  * [Demo](#view-demo)
-  * [Screenshots](#screenshots)
+  - [Demo](#view-demo)
+  - [Screenshots](#screenshots)
 - [Installation](#installation)
-  * [Requirements](#requirements)
+  - [Requirements](#requirements)
 - [Getting started](#getting-started)
-  * [Windows](#windows)
-  * [Linux](#linux)
+  - [Windows](#windows)
+  - [Linux](#linux)
 - [Documentation](#documentation)
 - [Developers](#developers)
 - [License](#license)
@@ -90,23 +91,15 @@ The first OOP python project 💜
 ## Installation
 
 Clone the repository and run the file `run.py`.
-Make sure that all [requirements](#requirements) are met.
-
 
 ### Requirements
 
-_The Python interpreter version 3.11+_
+_The `Python` interpreter version 3.11+ and preferably [`poetry`](https://python-poetry.org/)_
 
-All python dependencies specified in the file [requirements.txt](./requirements.txt)
-
-```bash
-pip install -r requirements.txt
-```
-
-Install requirements with make:
+Install requirements with `poetry`:
 
 ```bash
-make install-requirements
+poetry install
 ```
 
 ## Getting started
@@ -114,17 +107,20 @@ make install-requirements
 Clone this repository and navigate to it with the command:
 
 ```bash
-git clone https://github.com/Qu1nel/TicTacToe.git
-cd TicTacToe/
+git clone https://github.com/Qu1nel/Cardioid.git
+cd Cardioid/
 ```
 
-If you have the `make` installed, you can immediately create, activate the virtual environment and run the game with the command:
+If you have the `make` and `poetry` installed, you can run the game with the command:
 
 ```bash
-make init
-source .venv/bin/activate
-make install-requirements
 make run
+```
+
+Or
+
+```bash
+poetry run python run.py
 ```
 
 Or you can simply run `run.py` using the python interpreter
@@ -142,7 +138,6 @@ python3 run.py
 ```
 
 ## Documentation
-
 
 ```bash
 make help
