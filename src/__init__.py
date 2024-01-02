@@ -7,7 +7,7 @@ import pygame as pg
 from src.main import App
 
 __author__ = "Qu1nel"
-__version__ = "1.1"
+__version__ = "2.1"
 
 
 def resource_path(relative_path: Path) -> Path:
@@ -30,4 +30,4 @@ except FileNotFoundError:
 
 pg.display.set_caption("TicTacToe")
 
-GameAppTicTacToe = App()
+game = App()
