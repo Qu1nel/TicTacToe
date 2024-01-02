@@ -7,15 +7,26 @@ from src.config import FIRST_MOVE
 from src.game_state import GameState
 from src.interface import Interface
 from src.misc import PlayerID
-from src.player import ComputerPlayer, HumanPlayer
+from src.player import ComputerPlayer, HumanPlayer, Player
 from src.window import Window
 
 
 class App(AppBase):
-    """The main class game Tic Tac Toe."""
+    """The main game class that implements all the necessary logic.
+
+    Inherited from a class with 3 methods: checking for victory, restarting and updating the game state.
+
+    Attributes:
+        Window: Main window interaction API
+        GameStates: All game states
+        Board: Game board
+        Interface: Main drawing interaction API
+        HumanPlayer: Player object for user
+        ComputerPlayer: Player object for game
+
+    """
 
     def __init__(self) -> None:
-        """Init TicTacToe instance."""
         super().__init__()
 
         self.Window = Window(width=config.WINDOW_SIZE, height=config.WINDOW_SIZE, fps=config.FRAME_PER_SECOND)
@@ -97,13 +108,17 @@ class App(AppBase):
 
     def make_moves(self) -> None:
         """Chooses who makes the move."""
+        move_obj: Player
+
         match self.GameStates.who_make_move:
             case PlayerID.COMPUTER:
-                self.ComputerPlayer.step(states=self.GameStates, board=self.Board, game=self)
+                move_obj = self.ComputerPlayer
             case PlayerID.HUMAN:
-                self.HumanPlayer.step(states=self.GameStates, board=self.Board, game=self)
+                move_obj = self.HumanPlayer
             case _ as never:
                 assert_never(never)
+
+        move_obj.step(states=self.GameStates, board=self.Board, game=self)
 
     def run(self) -> Never:
         """Launch the game."""

@@ -2,6 +2,7 @@ import math
 import random
 import sys
 import time
+from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Final
 
@@ -23,6 +24,10 @@ class Player:
 
     figure: Figure
     number: PlayerID
+
+    @abstractmethod
+    def step(self, states: GameState, board: GameBoard, game: AppBase) -> None:  # noqa: D102
+        raise NotImplementedError
 
 
 class HumanPlayer(Player):
